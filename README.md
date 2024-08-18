@@ -129,3 +129,108 @@ Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` f
 ---
 
 Happy coding!
+=============================================================================================================================================================================================
+
+# Welcome
+
+# Project Research and Preparation
+
+## Fitness Fanatic
+
+Fitness Fanatic is a fictional website designed specifically for Code Institute for Project number 5 which is an e-commerce website. This site is all about training where you can buy fitness programs which go on for several weeks at several days a week. Or you can purchase basic fitness equipment for home use. The fictional workout programs are given in a fictional training location in person at say Fitness Fanatic Bridgewater Arklow. I chose the location Arklow as its where I live and for this type of business there is a lot of local competition in the local area.
+
+On the site you can purchase equipment.
+
+On the site you can purchase a training workout program which is several days a week for several weeks.
+
+On the site you can edit your profile once logged in.
+
+On the site a user can update their password. This is in the admin dropdown once logged in you just click on a link and a allauth template is opened which updates the password.
+
+On the site the administrator can add trainers, delete trainers and edit trainers.
+
+On the site the trainers can edit their profile (It should be noted that the trainer profile is different from the user profile as it allows a trainer if they want to purchase items from the center through the normal purchase workflow).
+
+On the site a trainer can create, edit and delete workout programs given by them once logged in as a trainer.
+
+On the site a trainer once logged in can view their mail where a user can contact them through a trainer contact form. This is done through a database table and the trainer contact template shows the trainer their email/(entries in the database table) where the new email is shown in bold and once marked as read will display as normal text. This is just a text based dump of the table info with a mark as read button. Once marked as read the read BooleanField in the table is marked as True. In this template it is hoped that it can be viewed by not read and year. For this project the entries wont be deleted as a paper trail would be needed for management.
+
+On the site web admin can be contacted through a contact form which can be viewed via site admins in the Django site admin interface.
+
+On the site a user can view trainer profiles and workout programmes given by each trainer.
+
+On the site a trainer can administer their classes via an attendance form where it shows a list of students which purchased the course and a checkbox to say they attended at the date the form is opened and a button to submit the form.
+
+If time permits I will have typical training workout programmes like the Skogg kettlebell system, RKS kettlebell system, for weight training the Body Beast workout program, Suspension training program, Scientific stretching program. These programs will be broken down into what is covered over the duration of the course. This information will be a template link on the trainers profile template page. Where if a user is interested in a program they can read about it here.
+
+
+### Categories
+
+1. name: freeweights, friendly_name: Free Weights
+2. name: kettlebells, friendly_name: Kettlebells
+3. name: yogamats, friendly_name: Yoga Mats
+4. name: workoutprograms, friendly_name: Workout Programs
+5. name: clearance, friendly_name: Clearance
+6. name: new_arrivals, friendly_name: New Arrivals
+
+## Entity Relationship Diagram
+
+![Fitness Fanatic ERD](/readme_images/fitness_fanatic_erd.png)
+
+## Wireframes
+
+### About
+
+![About](/readme_images/about.png)
+
+### Bag
+
+![bag](/readme_images/bag.png)
+
+### Checkout
+
+![Checkout](/readme_images/checkout.png)
+
+### Contact Trainers
+
+![Contact Trainers](/readme_images/contact_trainers.png)
+
+### Home Page/ Landing Page
+
+![Home Page](/readme_images/home_page.png)
+
+### Product new arrivals
+
+![Product new arrivals](/readme_images/products_category_new_arrivals.png)
+
+### Product workout programs
+
+![Product workout programs](/readme_images/Products_category_workoutprograms.png)
+
+### Products
+
+![Products](/readme_images/products.png)
+
+### Trainer Class Admin
+
+![Trainer Class Admin](/readme_images/trainer_class_admin.png)
+
+### Trainer Profile
+
+![Trainer Profile](/readme_images/trainer_profile.png)
+
+### Trainers Add Workout Program
+
+![Trainers Add Workout Program](/readme_images/trainers_add_workout_program.png)
+
+### Trainers
+
+![Trainers](/readme_images/trainers.png)
+
+### User Profile
+
+![User Profile](/readme_images/user_profile.png)
+
+### Admin Add Trainer
+
+![Admin Add Trainer](/readme_images/add_trainer.png)
