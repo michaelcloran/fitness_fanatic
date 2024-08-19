@@ -234,3 +234,60 @@ If time permits I will have typical training workout programmes like the Skogg k
 ### Admin Add Trainer
 
 ![Admin Add Trainer](/readme_images/add_trainer.png)
+
+## EPICS
+
+### Admin
+
+- I can administer the site and Trainers <EPIC Admin>
+  - I can read Site Admin emails through Django Admin
+  - I can create, edit and delete (CRUD) trainers
+  - I can create, edit and delete (CRUD) products
+
+### Trainer
+
+- I can administer my Trainer account <EPIC Trainer>
+  - I can edit the trainer profile
+  - I can create, edit and delete (CRUD) a workout program
+  - I can view trainer email and mark it as read
+  - I can set class attendance for enrolled students
+
+### User
+
+- I can administer my User account and contact the site if need be <EPIC User>
+  - As a User I can Register with the site so I can Login
+  - As a User I can Login to the site so I can use and administer my account
+  - As a User I can view Trainers and their courses and see their Bio's
+  - As a User I can order a product so that I can get it delivered to me
+  - As a User I can add a product to the Bag and administer the shopping bag
+  - As a User I can edit my profile so that I can have an up to date profile
+  - As a User I can enroll on a course so that I can partake in a workout program
+  - As a User I can contact site admin for any site issues that I may have
+  - As a User I can contact a Trainer for any queries or concerns I may have in relation to workouts
+
+## User Stories
+
+### Admin
+
+- As an Admin User I can read Site Admin emails through the Django Admin interface <Admin View Site Email>
+- As an Admin User I can create, edit and delete (CRUD) trainers so that I can administer trainers <Admin CRUD Trainers>
+- As an Admin User I can create, edit and delete (CRUD) products so that I can administer products <Admin CRUD Products>
+
+### Trainer
+
+- As a Trainer I can edit my Trainer Profile so that I can have an update profile <Trainer edit Trainer Profile>
+- As a Trainer I can create, edit and delete (CRUD) workout programs so that I can manage my workout programs <Trainer CRUD Workouts>
+- As a Trainer I can view Trainer email so that I can manage my email <Trainer view Email>
+- As a Trainer I can set class attendance for a class so that I can manage my workout program <Trainer Class Attendance>
+
+### User
+
+- As a User I can Register with the site so I can Login <User Register>
+- As a User I can Login to the site so I can use and administer my account <User Login>
+- As a User I can view Trainers and their courses and see their Bio's <User View Trainers>
+- As a User I can order a product so that I can get it delivered to me <User Order Product>
+- As a User I can add a product to the Bag and administer the shopping bag <User Administer Bag>
+- As a User I can edit my profile so that I can have an up to date profile <User edit Profile>
+- As a User I can enroll on a course so that I can partake in a workout program <User enroll Course>
+- As a User I can contact site admin for any site issues that I may have <User email Site Admin>
+- As a User I can contact a Trainer for any queries or concerns I may have in relation to workouts <User email Trainer>
