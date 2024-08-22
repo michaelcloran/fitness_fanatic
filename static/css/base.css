@@ -59,7 +59,8 @@ body {
 }
 
 .text-white {
-    color: #fff !important;
+    background-color: 1E1E2A;
+    color:  #fff !important;
 }
 
 .border-black {
