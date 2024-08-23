@@ -18,19 +18,19 @@
         </li>
 
         <li class="nav-item dropdown">
-            <a class="logo-font font-weight-bold nav-link text-black mr-5" href="#" id="clothing-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="logo-font font-weight-bold nav-link text-black mr-5" href="#" id="training-equipmenmt-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Training Equipment
             </a>
             <div class="dropdown-menu border-0" aria-labelledby="clothing-link">
-                <a href="" class="dropdown-item">Weights &amp; kettlebells</a>
-                <a href="" class="dropdown-item">Spin Bikes</a>
-                <a href="" class="dropdown-item">Yoga Mats</a>
-                <a href="" class="dropdown-item">All Training Equipment</a>
+                <a href="{% url 'products' %}?category=freeweights,kettlebells" class="dropdown-item">Weights &amp; kettlebells</a>
+                <a href="{% url 'products' %}?category=spinning" class="dropdown-item">Spin Bikes</a>
+                <a href="{% url 'products' %}?category=yogamats" class="dropdown-item">Yoga Mats</a>
+                <a href="{% url 'products' %}?category=freeweights,kettlebells,spinning,yogamats" class="dropdown-item">All Training Equipment</a>
             </div>
         </li>
 
         <li class="nav-item dropdown">
-            <a class="logo-font font-weight-bold nav-link text-black mr-5" href="#" id="homeware-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="logo-font font-weight-bold nav-link text-black mr-5" href="#" id="courses-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Courses
             </a>
             <div class="dropdown-menu border-0" aria-labelledby="homeware-link">
@@ -43,9 +43,9 @@
                 Special Offers
             </a>
             <div class="dropdown-menu border-0" aria-labelledby="specials-link">
-                <a href="" class="dropdown-item">New Arrivals</a>
-                <a href="" class="dropdown-item">Clearance</a>
-                <a href="" class="dropdown-item">All Specials</a>
+                <a href="{% url 'products' %}?category=new_arrivals" class="dropdown-item">New Arrivals</a>
+                <a href="{% url 'products' %}?category=clearance" class="dropdown-item">Clearance</a>
+                <a href="{% url 'products' %}?category=new_arrivals,clearance" class="dropdown-item">All Specials</a>
             </div>
         </li>
         <li class="nav-item dropdown">
