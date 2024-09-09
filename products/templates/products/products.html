@@ -85,7 +85,7 @@
                                             {% if request.user.is_superuser %}
                                                 <small class="ml-3">
                                                     <a href="{% url 'edit_product' product.id %}">Edit</a> | 
-                                                    <button class="text-danger btn-delete-product" data-product_id="{{product.id}}">Delete</button>
+                                                    <button class="btn-delete-product btn-danger" data-product_id="{{product.id}}">Delete</button>
                                                 </small>
                                             {% endif %}
                                         </div>
@@ -131,7 +131,7 @@
                 <h5 class="modal-title"
                     id="deleteModalLabel">Delete product?</h5>
                 <button type="button" class="btn-close"
-                    data-bs-dismiss="modal" aria-label="Close"></button>
+                    data-bs-dismiss="modal" aria-label="Close">X</button>
                 </div>
                 <div class="modal-body">
                 Are you sure you want to delete this product?

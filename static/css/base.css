@@ -258,6 +258,11 @@ input[name='q']::placeholder {
     border-radius: 0;
 }
 
+/* about */
+.about-heading{
+    margin-top: 500px !important;
+}
+
 /* -------------------------------- Media Queries */
 
 /* Slightly larger container on xl screens */
@@ -288,6 +293,10 @@ input[name='q']::placeholder {
         padding-top: 116px;
     }
 
+    /* about */
+    .about-heading{
+        margin-top: 250px !important;
+    }
     body {
         height: calc(100vh - 116px);
     }
