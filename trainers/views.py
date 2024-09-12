@@ -69,3 +69,13 @@ def username_exists(username):
         return True
     
     return False
+
+def view_trainers(request):
+    """ gives a list of all trainers """
+    trainers = TrainerProfile.objects.all()
+
+    context = {
+        'trainers': trainers,
+    }
+
+    return render(request, 'trainers/view_trainers.html', context)
