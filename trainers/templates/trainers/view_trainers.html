@@ -33,11 +33,11 @@
                                 </div>
                                 {% if trainer.image %}
                                 <a href="{% url 'trainer_detail' trainer.id %}">
-                                    <img class="card-img-top img-fluid" src="{{ trainer.image.url }}" alt="{{ trainer.name }}">
+                                    <img class="card-img-top img-fluid" src="{{ trainer.image.url }}" alt="{{ trainer.user.first_name }}">
                                 </a>
                                 {% else %}
                                 <a href="{% url 'trainer_detail' trainer.id %}">
-                                    <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ trainer.name }}">
+                                    <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ trainer.user.first_name }}">
                                 </a>
                                 {% endif %}
                                 

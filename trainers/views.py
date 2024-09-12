@@ -7,7 +7,7 @@ from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.decorators import login_required
 
 from .models import TrainerProfile
-from .forms import TrainerProfileForm, AddTrainerUserNameForm
+from .forms import TrainerProfileForm, AddTrainerUserNameForm,ViewTrainerUserNameForm
 
 # Create your views here.
 @login_required
@@ -82,26 +82,43 @@ def view_trainers(request):
 
 @login_required
 def edit_trainer(request, trainer_id):
-    """ Edit a trainer infos """
+    """ Edit a trainer details 
+    Note:
+    I am using 2 forms her one for the allauth User
+    and one for the TrainerProfile
+    """
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
 
     trainer = get_object_or_404(TrainerProfile, pk=trainer_id)
+    user = User.objects.get(username=trainer.user.username)
+
     if request.method == 'POST':
-        #form = TrainerProfileForm(request.POST, request.FILES, instance=product)
         trainer_form = TrainerProfileForm(request.POST, request.FILES, instance=trainer)
-        trainer_username_form = AddTrainerUserNameForm(request.POST)
-        if trainer_form.is_valid() and trainer_username_form.is_valid:
-            #form.save()
-            messages.success(request, 'Successfully updated trainer infos!')
-            return redirect(reverse('product_details', args=[trainer.id]))
+        trainer_username_form = ViewTrainerUserNameForm(request.POST)
+        if trainer_form.is_valid() and trainer_username_form.is_valid():
+            
+            email = request.POST.get('email')
+            firstname = request.POST.get('first_name')
+            lastname = request.POST.get('last_name')
+
+            user.first_name = firstname
+            user.last_name = lastname
+            user.email = email
+            user.save()
+
+            profile = trainer_form.save(commit=False)
+            profile.user = user
+            profile.save()
+           
+            messages.success(request, 'Successfully updated trainer details!')
+            return redirect(reverse('trainer_detail', args=[trainer.id]))
         else:
             messages.error(request, 'Failed to update trainer info. Please ensure the form is valid.')
     else:
-        #form = ProductForm(instance=product)
-        trainer_form = TrainerProfileForm( instance=trainer)
-        trainer_username_form = AddTrainerUserNameForm()
+        trainer_form = TrainerProfileForm(instance=trainer)
+        trainer_username_form = ViewTrainerUserNameForm(instance=user)
         messages.info(request, f'You are editing {trainer.user.first_name}')
 
     template = 'trainers/edit_trainer.html'
