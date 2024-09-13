@@ -24,7 +24,7 @@ def add_trainer(request):
         return redirect(reverse('home'))
 
     if request.method == 'POST':
-        trainer_form = TrainerProfileForm(request.POST)
+        trainer_form = TrainerProfileForm(request.POST, request.FILES)
         trainer_username_form = AddTrainerUserNameForm(request.POST)
 
         if trainer_form.is_valid() and trainer_username_form.is_valid():
@@ -48,6 +48,7 @@ def add_trainer(request):
                     profile.save()
                     
                     messages.success(request, 'Trainer Profile successfully added')
+                    return redirect(reverse('trainer_detail', args=[profile.id]))
             else:
                 messages.error(request, f"Username {trainer_username_form.cleaned_data.get('username')} already exists!.")
         else:
