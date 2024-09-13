@@ -141,3 +141,21 @@ def trainer_detail(request, trainer_id):
     }
 
     return render(request, 'trainers/trainer_details.html', context)
+
+@login_required
+def delete_trainer(request, trainer_id):
+    """ Delete a trainer from the site """
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only store owners can do that.')
+        return redirect(reverse('home'))
+
+    trainer = get_object_or_404(TrainerProfile, pk=trainer_id)
+    try:
+        user = User.objects.get(username = trainer.user.username)
+        user.delete()
+        messages.success(request, "The user is deleted")
+    except User.DoesNotExist:
+        messages.error(request, "The user not found")
+    trainer.delete()
+    messages.success(request, 'Trainer deleted!')
+    return redirect(reverse('view_trainers'))
