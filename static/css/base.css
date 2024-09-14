@@ -263,6 +263,11 @@ input[name='q']::placeholder {
     margin-top: 500px !important;
 }
 
+/* workout program */
+.default-hidden{
+    display: none;
+}
+
 /* -------------------------------- Media Queries */
 
 /* Slightly larger container on xl screens */

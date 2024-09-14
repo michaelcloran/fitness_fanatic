@@ -11,4 +11,4 @@ class TrainerProfile(models.Model):
     date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.user.username
+        return f"{self.user.first_name} {self.user.last_name}"

@@ -1,4 +1,5 @@
 from django.db import models
+from trainers.models import TrainerProfile
 
 # Create your models here.
 class Category(models.Model):
@@ -29,3 +30,15 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class WorkoutProgram(models.Model):
+    trainer = models.ForeignKey(TrainerProfile, null=True, blank=True, on_delete=models.SET_NULL)
+    product = models.ForeignKey(Product, null=False, blank=False, on_delete=models.CASCADE)
+    class_size = models.IntegerField(null=False, blank=False, default=15)
+    start_date = models.DateField(null=False, blank=False)
+    number_weeks = models.IntegerField(null=False, blank=False, default=12)
+    end_date = models.DateField(null=False, blank=False)
+
+    def __str__(self):
+        return f"{self.trainer.first_name} {self.trainer.last_name}"

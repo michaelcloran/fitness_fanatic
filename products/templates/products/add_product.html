@@ -25,6 +25,7 @@
             <div class="col-12 col-md-6">
                 <form method="POST" action="{% url 'add_product' %}" class="form mb-2" enctype="multipart/form-data">
                     {% csrf_token %}
+                    <div class="workout-program-form default-hidden">{{ workout_form | crispy }}</div>
                     {% for field in form %}
                         {% if field.name != 'image' %}
                             {{ field | as_crispy_field }}
@@ -48,6 +49,24 @@
         $('#new-image').change(function() {
             var file = $('#new-image')[0].files[0];
             $('#filename').text(`Image will be set to: ${file.name}`);
+        });
+    </script>
+
+    <script type="text/javascript">
+        $("#id_category").change(function() {
+            let selectedElement = document.querySelector("#id_category");
+            let category = selectedElement.value;
+            console.log(category);
+            if(category == 7){
+                $(".workout-program-form").removeClass("default-hidden");
+            }else{
+                let resultBool = $(".workout-program-form").hasClass('default-hidden');
+                if(resultBool == false){
+                    $(".workout-program-form").addClass("default-hidden");
+                }
+            }
+            
+            //if( category == )
         });
     </script>
 {% endblock %}

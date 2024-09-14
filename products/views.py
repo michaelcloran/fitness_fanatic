@@ -3,9 +3,10 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.db.models.functions import Lower
-from .models import Product, Category
+from .models import Product, Category, WorkoutProgram
+from trainers.models import TrainerProfile
 
-from .forms import ProductForm
+from .forms import ProductForm, WorkoutProgramForm
 
 # Create your views here.
 def all_products(request):
@@ -76,21 +77,50 @@ def add_product(request):
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
-
+    temp_category_int = 0
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)
-        if form.is_valid():
-            product = form.save()
-            messages.success(request, 'Successfully added product!')
-            return redirect(reverse('product_details', args=[product.id]))
+        workout_form = WorkoutProgramForm(request.POST)
+
+        temp_category_int = request.POST.get('category')
+        print(temp_category_int)
+
+        if temp_category_int == '7': # workout program
+            if form.is_valid() and workout_form.is_valid():
+                product = form.save()
+
+                wo_model = WorkoutProgram()
+
+                trainer = get_object_or_404(TrainerProfile, pk=request.POST.get('trainer'))
+
+                wo_model.trainer = trainer
+                wo_model.product = product
+                wo_model.class_size = request.POST.get('class_size')
+                wo_model.start_date = request.POST.get('start_date')
+                wo_model.number_weeks = request.POST.get('number_weeks')
+                wo_model.end_date = request.POST.get('end_date')
+
+                wo_model.save()
+                
+                messages.success(request, 'Successfully added workout!')
+                return redirect(reverse('product_details', args=[product.id]))
+            else:
+                messages.error(request, 'Failed to add product. Please ensure the form is valid.')
         else:
-            messages.error(request, 'Failed to add product. Please ensure the form is valid.')
+            if form.is_valid():
+                product = form.save()
+                messages.success(request, 'Successfully added product!')
+                return redirect(reverse('product_details', args=[product.id]))
+            else:
+                messages.error(request, 'Failed to add product. Please ensure the form is valid.')
     else:
         form = ProductForm()
+        workout_form = WorkoutProgramForm()
 
     template = 'products/add_product.html'
     context = {
         'form': form,
+        'workout_form': workout_form,
     }
 
     return render(request, template, context)
