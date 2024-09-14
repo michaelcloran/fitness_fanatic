@@ -59,14 +59,23 @@
             console.log(category);
             if(category == 7){
                 $(".workout-program-form").removeClass("default-hidden");
+                document.getElementById("id_trainer").required = true;
+                document.getElementById("id_class_size").required = true;
+                document.getElementById("id_start_date").required = true;
+                document.getElementById("id_number_weeks").required = true;
+                document.getElementById("id_end_date").required = true;
             }else{
                 let resultBool = $(".workout-program-form").hasClass('default-hidden');
                 if(resultBool == false){
                     $(".workout-program-form").addClass("default-hidden");
+                    document.getElementById("id_trainer").required = false;
+                    document.getElementById("id_class_size").required = false;
+                    document.getElementById("id_start_date").required = false;
+                    document.getElementById("id_number_weeks").required = false;
+                    document.getElementById("id_end_date").required = false;
                 }
             }
-            
-            //if( category == )
         });
     </script>
+
 {% endblock %}
