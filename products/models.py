@@ -41,4 +41,4 @@ class WorkoutProgram(models.Model):
     end_date = models.DateField(null=False, blank=False)
 
     def __str__(self):
-        return f"{self.trainer.first_name} {self.trainer.last_name}"
+        return f"{self.trainer.user.first_name} {self.trainer.user.last_name}"

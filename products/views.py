@@ -64,10 +64,26 @@ def product_detail(request, product_id):
     """ A view to show individual product details """
 
     product = get_object_or_404(Product, pk=product_id)
+    print(product.category)
+    print(product.category == 'workoutprograms')
+    print("workoutprograms" in (product.category.name))
 
-    context = {
-        'product': product,
-    }
+    if product.category.name == "workoutprograms":
+        print("workout")
+        wo_program = WorkoutProgram.objects.filter(product_id=product_id).values()
+        trainer = TrainerProfile.objects.filter(id=wo_program[0]['trainer_id'])
+                
+        context = {
+            'product': product,
+            'workout_program':wo_program[0],
+            'trainer_name': trainer[0],
+            'is_workout_program': True,
+        }
+    else:
+        context = {
+            'product': product,
+            'is_workout_program':False,
+        }
 
     return render(request, 'products/product_detail.html', context)
 

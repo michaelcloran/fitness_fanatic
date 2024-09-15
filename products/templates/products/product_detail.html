@@ -37,6 +37,15 @@
                             </a>
                         </p>
                     {% endif %}
+                    {% if is_workout_program == True %}
+                    
+                        <p class="mt-3">Trainer Name: {{ trainer_name }}</p>
+                        <p class="mt-3">Start date: {{workout_program.start_date}}</p>
+                        <p class="mt-3">Number of weeks: {{workout_program.number_weeks}}</p>
+                        <p class="mt-3">End date: {{workout_program.end_date}}</p>
+                        <p class="mt-3">Class size :{{workout_program.class_size}}</p>
+                        
+                    {% endif %}
                     {% if product.rating %}
                         <small class="text-muted"><i class="fas fa-star mr-1"></i>{{ product.rating }} / 5</small>
                     {% else %}
