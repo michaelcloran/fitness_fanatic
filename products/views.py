@@ -64,10 +64,7 @@ def product_detail(request, product_id):
     """ A view to show individual product details """
 
     product = get_object_or_404(Product, pk=product_id)
-    print(product.category)
-    print(product.category == 'workoutprograms')
-    print("workoutprograms" in (product.category.name))
-
+    
     if product.category.name == "workoutprograms":
         print("workout")
         wo_program = WorkoutProgram.objects.filter(product_id=product_id).values()
@@ -99,7 +96,6 @@ def add_product(request):
         workout_form = WorkoutProgramForm(request.POST)
 
         temp_category_str = request.POST.get('category')
-        print(temp_category_str)
 
         if temp_category_str == '7': # workout program
             if form.is_valid() and workout_form.is_valid():
@@ -149,7 +145,7 @@ def edit_product(request, product_id):
         return redirect(reverse('home'))
     temp_category_str = 0
     product = get_object_or_404(Product, pk=product_id)
-    temp_category_str = product.category  # request.POST.get('category')
+    temp_category_str = product.category  
     temp_str = str(temp_category_str)
     if temp_str == 'workoutprograms':
         wo_program = get_object_or_404(WorkoutProgram, product_id=product.id)
@@ -201,6 +197,11 @@ def delete_product(request, product_id):
         return redirect(reverse('home'))
 
     product = get_object_or_404(Product, pk=product_id)
-    product.delete()
+    if str(product.category) == 'workoutprograms':
+        wo_program = get_object_or_404(WorkoutProgram, product_id=product.id)
+        wo_program.delete()
+        product.delete()
+    else:
+        product.delete()
     messages.success(request, 'Product deleted!')
     return redirect(reverse('products'))
