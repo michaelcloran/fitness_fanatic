@@ -93,15 +93,15 @@ def add_product(request):
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
-    temp_category_int = 0
+    temp_category_str = 0
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)
         workout_form = WorkoutProgramForm(request.POST)
 
-        temp_category_int = request.POST.get('category')
-        print(temp_category_int)
+        temp_category_str = request.POST.get('category')
+        print(temp_category_str)
 
-        if temp_category_int == '7': # workout program
+        if temp_category_str == '7': # workout program
             if form.is_valid() and workout_form.is_valid():
                 product = form.save()
 
@@ -147,22 +147,46 @@ def edit_product(request, product_id):
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
-
+    temp_category_str = 0
     product = get_object_or_404(Product, pk=product_id)
+    temp_category_str = product.category  # request.POST.get('category')
+    temp_str = str(temp_category_str)
+    if temp_str == 'workoutprograms':
+        wo_program = get_object_or_404(WorkoutProgram, product_id=product.id)
+
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES, instance=product)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Successfully updated product!')
-            return redirect(reverse('product_details', args=[product.id]))
+       
+        if temp_str == 'workoutprograms':
+            workout_form = WorkoutProgramForm(request.POST, instance=wo_program)
+            if form.is_valid() and workout_form.is_valid():
+                form.save()
+                workout_form.save(commit=False)
+                workout_form.product = product.id
+                workout_form.save()
+                return redirect(reverse('product_details', args=[product.id]))
+            else:
+                messages.error(request, 'Failed to update product. Please ensure the form is valid.')
         else:
-            messages.error(request, 'Failed to update product. Please ensure the form is valid.')
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Successfully updated product!')
+                return redirect(reverse('product_details', args=[product.id]))
+            else:
+                messages.error(request, 'Failed to update product. Please ensure the form is valid.')
     else:
         form = ProductForm(instance=product)
+
+        if temp_str == 'workoutprograms':
+            workout_form = WorkoutProgramForm(instance=wo_program)
+        else:
+            workout_form = WorkoutProgramForm()
+
         messages.info(request, f'You are editing {product.name}')
 
     template = 'products/edit_product.html'
     context = {
+        'workout_form': workout_form,
         'form': form,
         'product': product,
     }

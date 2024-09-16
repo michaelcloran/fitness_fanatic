@@ -56,7 +56,6 @@
         $("#id_category").change(function() {
             let selectedElement = document.querySelector("#id_category");
             let category = selectedElement.value;
-            console.log(category);
             if(category == 7){
                 $(".workout-program-form").removeClass("default-hidden");
                 document.getElementById("id_trainer").required = true;

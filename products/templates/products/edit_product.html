@@ -25,6 +25,7 @@
             <div class="col-12 col-md-6">
                 <form method="POST" action="{% url 'edit_product' product.id %}" class="form mb-2" enctype="multipart/form-data">
                     {% csrf_token %}
+                    <div class="workout-program-form default-hidden">{{ workout_form | crispy }}</div>
                     {% for field in form %}
                         {% if field.name != 'image' %}
                             {{ field | as_crispy_field }}
@@ -49,5 +50,39 @@
             var file = $('#new-image')[0].files[0];
             $('#filename').text(`Image will be set to: ${file.name}`);
         });
+    </script>
+
+    <script type="text/javascript">
+        let selectedElement = document.querySelector("#id_category");
+            let category = selectedElement.value;
+            if(category == 7){ //its a workout program
+                $("#id_category option[value='1']").remove();
+                $("#id_category option[value='2']").remove();
+                $("#id_category option[value='3']").remove();
+                $("#id_category option[value='4']").remove();
+                $("#id_category option[value='5']").remove();
+                $("#id_category option[value='6']").remove();
+
+
+                $(".workout-program-form").removeClass("default-hidden");
+                document.getElementById("id_trainer").required = true;
+                document.getElementById("id_class_size").required = true;
+                document.getElementById("id_start_date").required = true;
+                document.getElementById("id_number_weeks").required = true;
+                document.getElementById("id_end_date").required = true;
+            }else{// its a normal buyable product
+                let resultBool = $(".workout-program-form").hasClass('default-hidden');
+
+                $("#id_category option[value='7']").remove();
+
+                if(resultBool == false){
+                    $(".workout-program-form").addClass("default-hidden");
+                    document.getElementById("id_trainer").required = false;
+                    document.getElementById("id_class_size").required = false;
+                    document.getElementById("id_start_date").required = false;
+                    document.getElementById("id_number_weeks").required = false;
+                    document.getElementById("id_end_date").required = false;
+                }
+            }
     </script>
 {% endblock %}
