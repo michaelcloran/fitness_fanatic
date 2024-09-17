@@ -10,6 +10,11 @@ from .models import TrainerProfile
 from .forms import TrainerProfileForm, AddTrainerUserNameForm,ViewTrainerUserNameForm
 
 # Create your views here.
+def check_trainer_user_exists(username):
+    if TrainerProfile.objects.filter(user=username).exists():
+        return True
+    return False
+
 @login_required
 def add_trainer(request):
     """ used by admin to add a trainer to the system 
@@ -77,6 +82,7 @@ def view_trainers(request):
 
     context = {
         'trainers': trainers,
+        'is_trainer_bool': check_trainer_user_exists(request.user),
     }
 
     return render(request, 'trainers/view_trainers.html', context)
@@ -88,7 +94,7 @@ def edit_trainer(request, trainer_id):
     I am using 2 forms her one for the allauth User
     and one for the TrainerProfile
     """
-    if not request.user.is_superuser:
+    if not request.user.is_superuser and not check_trainer_user_exists(request.user):
         messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
 
@@ -139,6 +145,7 @@ def trainer_detail(request, trainer_id):
 
     context = {
         'trainer': trainer,
+        'is_trainer_bool': check_trainer_user_exists(request.user),
     }
 
     return render(request, 'trainers/trainer_details.html', context)

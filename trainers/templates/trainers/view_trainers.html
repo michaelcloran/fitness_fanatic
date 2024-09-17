@@ -45,12 +45,13 @@
                                     <div class="row">
                                         <div class="col">
                                             
-                                            {% if request.user.is_superuser %}
                                                 <small class="ml-3">
-                                                    <a href="">Edit</a> | 
-                                                    <button class="btn-delete-trainer btn-danger" data-trainer_id="{{trainer.id}}">Delete</button>
+                                                    {% if request.user.is_superuser or is_trainer_bool == True %}
+                                                    <a href="{% url 'edit_trainer' trainer.id %}">Edit</a> | {% endif %} 
+                                                    {% if request.user.is_superuser %}<button class="btn-delete-trainer btn-danger" data-trainer_id="{{trainer.id}}">Delete</button>
+                                                    {% endif %}
                                                 </small>
-                                            {% endif %}
+                                            
                                         </div>
                                     </div>
                                 </div>

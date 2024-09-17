@@ -28,15 +28,16 @@
             </div>
             <div class="col-12 col-md-6 col-lg-4">
                 <div class="product-details-container mb-5 mt-md-5">
-                    <p class="mb-0">{{ trainer.user.first_name }}</p>
+                    <p class="mb-0">{{ trainer.user.first_name }} {{ trainer.user.last_name }}</p>
                     
-                    
-                    {% if request.user.is_superuser %}
                         <small class="ml-3">
-                            <a href="{% url 'edit_trainer' trainer.id %}">Edit</a> | 
+                            {% if request.user.is_superuser or is_trainer_bool %}
+                            <a href="{% url 'edit_trainer' trainer.id %}">Edit</a> |{% endif %} 
+                            {% if request.user.is_superuser %}
                             <a class="text-danger btn-delete-trainer" data-trainer_id="{{trainer.id}}">Delete</a>
+                            {% endif %}
                         </small>
-                    {% endif %}
+                   
                     <p class="mt-3">{{ trainer.bio }}</p>
                     
                 </div>
