@@ -9,6 +9,11 @@ from trainers.models import TrainerProfile
 from .forms import ProductForm, WorkoutProgramForm
 
 # Create your views here.
+def check_trainer_user_exists(username):
+    if TrainerProfile.objects.filter(user=username).exists():
+        return True
+    return False
+
 def all_products(request):
     """ A view to show all products, including sorting and search queries """
 
@@ -56,6 +61,7 @@ def all_products(request):
         'search_term': query,
         'current_categories': categories,
         'current_sorting': current_sorting,
+        'is_trainer_bool': check_trainer_user_exists(request.user),
     }
 
     return render(request, 'products/products.html', context)
@@ -66,7 +72,7 @@ def product_detail(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     
     if product.category.name == "workoutprograms":
-        print("workout")
+        
         wo_program = WorkoutProgram.objects.filter(product_id=product_id).values()
         trainer = TrainerProfile.objects.filter(id=wo_program[0]['trainer_id'])
                 
@@ -75,11 +81,13 @@ def product_detail(request, product_id):
             'workout_program':wo_program[0],
             'trainer_name': trainer[0],
             'is_workout_program': True,
+            'is_trainer_bool': check_trainer_user_exists(request.user),
         }
     else:
         context = {
             'product': product,
             'is_workout_program':False,
+            'is_trainer_bool': check_trainer_user_exists(request.user),
         }
 
     return render(request, 'products/product_detail.html', context)
@@ -87,8 +95,8 @@ def product_detail(request, product_id):
 @login_required
 def add_product(request):
     """ Add a product to the store """
-    if not request.user.is_superuser:
-        messages.error(request, 'Sorry, only store owners can do that.')
+    if not request.user.is_superuser and not check_trainer_user_exists(request.user):
+        messages.error(request, 'Sorry, only site admin can do that.')
         return redirect(reverse('home'))
     temp_category_str = 0
     if request.method == 'POST':
@@ -140,7 +148,7 @@ def add_product(request):
 @login_required
 def edit_product(request, product_id):
     """ Edit a product in the store """
-    if not request.user.is_superuser:
+    if not request.user.is_superuser and not check_trainer_user_exists(request.user):
         messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
     temp_category_str = 0
@@ -192,7 +200,7 @@ def edit_product(request, product_id):
 @login_required
 def delete_product(request, product_id):
     """ Delete a product from the store """
-    if not request.user.is_superuser:
+    if not request.user.is_superuser and not check_trainer_user_exists(request.user):
         messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
 

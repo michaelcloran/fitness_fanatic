@@ -82,7 +82,7 @@
                                             {% else %}
                                                 <small class="text-muted">No Rating</small>
                                             {% endif %}
-                                            {% if request.user.is_superuser %}
+                                            {% if request.user.is_superuser or is_trainer_bool == True %}
                                                 <small class="ml-3">
                                                     <a href="{% url 'edit_product' product.id %}">Edit</a> | 
                                                     <button class="btn-delete-product btn-danger" data-product_id="{{product.id}}">Delete</button>
