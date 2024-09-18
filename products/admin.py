@@ -31,6 +31,8 @@ class WorkoutProgramAdmin(admin.ModelAdmin):
         'end_date',
     )
 
+
+
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(WorkoutProgram, WorkoutProgramAdmin)

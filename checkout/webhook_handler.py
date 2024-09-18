@@ -3,8 +3,8 @@ from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.conf import settings
 
-from .models import Order, OrderLineItem
-from products.models import Product
+from .models import Order, OrderLineItem,CustomersEnrolledOnCourse
+from products.models import Product, WorkoutProgram
 from profiles.models import UserProfile
 
 import json
@@ -137,6 +137,14 @@ class StripeWH_Handler:
                             quantity=item_data,
                         )
                         order_line_item.save()
+                        if str(product.category) == 'workoutprograms':
+                            print("workoutprogram enrolling customer")
+                            wo_program = get_object_or_404(WorkoutProgram, product=product.id)
+                            customer_enroll_on_course= CustomersEnrolledOnCourse(
+                                order_line_item=order_line_item,
+                                wo_program=wo_program,
+                            )
+                            customer_enroll_on_course.save()
                     else:
                         for size, quantity in item_data['items_by_size'].items():
                             order_line_item = OrderLineItem(

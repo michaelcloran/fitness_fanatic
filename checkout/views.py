@@ -4,8 +4,8 @@ from django.views.decorators.http import require_POST
 from django.conf import settings
 
 from .forms import OrderForm
-from .models import Order, OrderLineItem
-from products.models import Product
+from .models import Order, OrderLineItem, CustomersEnrolledOnCourse
+from products.models import Product, WorkoutProgram
 from profiles.forms import UserProfileForm
 from profiles.models import UserProfile
 from bag.contexts import bag_contents
@@ -66,6 +66,15 @@ def checkout(request):
                             quantity=item_data,
                         )
                         order_line_item.save()
+
+                        if str(product.category) == 'workoutprograms':
+                            print("workoutprogram enrolling customer")
+                            wo_program = get_object_or_404(WorkoutProgram, product=product.id)
+                            customer_enroll_on_course= CustomersEnrolledOnCourse(
+                                order_line_item=order_line_item,
+                                wo_program=wo_program,
+                            )
+                            customer_enroll_on_course.save()
                     else:
                         for size, quantity in item_data['items_by_size'].items():
                             order_line_item = OrderLineItem(
@@ -148,6 +157,8 @@ def checkout_success(request, order_number):
         # Attach the user's profile to the order
         order.user_profile = profile
         order.save()
+        
+
 
         # Save the user's info
         if save_info:

@@ -23,6 +23,11 @@ def all_products(request):
     direction = None
     products = Product.objects.all()
 
+    if request.user.is_authenticated:
+        trainer_bool = check_trainer_user_exists(request.user)
+    else:
+        trainer_bool = False
+
     if request.GET:
         if 'sort' in request.GET:
             sortkey = request.GET['sort']
@@ -61,7 +66,7 @@ def all_products(request):
         'search_term': query,
         'current_categories': categories,
         'current_sorting': current_sorting,
-        'is_trainer_bool': check_trainer_user_exists(request.user),
+        'is_trainer_bool': trainer_bool,
     }
 
     return render(request, 'products/products.html', context)
@@ -70,6 +75,11 @@ def product_detail(request, product_id):
     """ A view to show individual product details """
 
     product = get_object_or_404(Product, pk=product_id)
+
+    if request.user.is_authenticated:
+        trainer_bool = check_trainer_user_exists(request.user)
+    else:
+        trainer_bool = False
     
     if product.category.name == "workoutprograms":
         
@@ -81,13 +91,13 @@ def product_detail(request, product_id):
             'workout_program':wo_program[0],
             'trainer_name': trainer[0],
             'is_workout_program': True,
-            'is_trainer_bool': check_trainer_user_exists(request.user),
+            'is_trainer_bool': trainer_bool,
         }
     else:
         context = {
             'product': product,
             'is_workout_program':False,
-            'is_trainer_bool': check_trainer_user_exists(request.user),
+            'is_trainer_bool': trainer_bool,
         }
 
     return render(request, 'products/product_detail.html', context)
