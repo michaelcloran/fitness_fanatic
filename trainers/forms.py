@@ -163,3 +163,6 @@ class ContactTrainerRequestForm(forms.ModelForm):
             self.fields[field].widget.attrs['placeholder'] = placeholder
             self.fields[field].widget.attrs['class'] = 'border-black rounded-0 add_trainer-form-input'
             self.fields[field].label = False
+
+
+

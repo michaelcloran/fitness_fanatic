@@ -80,9 +80,14 @@ def view_trainers(request):
     """ gives a list of all trainers """
     trainers = TrainerProfile.objects.all()
 
+    if request.user.is_authenticated:
+        trainer_bool = check_trainer_user_exists(request.user)
+    else:
+        trainer_bool = False
+
     context = {
         'trainers': trainers,
-        'is_trainer_bool': check_trainer_user_exists(request.user),
+        'is_trainer_bool': trainer_bool,
     }
 
     return render(request, 'trainers/view_trainers.html', context)
@@ -145,10 +150,15 @@ def trainer_detail(request, trainer_id):
 
     contact_form = ContactTrainerRequestForm()
 
+    if request.user.is_authenticated:
+        trainer_bool = check_trainer_user_exists(request.user)
+    else:
+        trainer_bool = False
+
     context = {
         'trainer': trainer,
         'contact_form': contact_form,
-        'is_trainer_bool': check_trainer_user_exists(request.user),
+        'is_trainer_bool': trainer_bool,
     }
 
     return render(request, 'trainers/trainer_details.html', context)
@@ -215,3 +225,73 @@ def contact_trainer(request, trainer_id):
     }
 
     return render(request, 'trainers/trainer_details.html', context)
+
+@login_required
+def view_trainer_email(request, trainer_id):
+    """ based on trainer id get mail that is unread """
+    if not request.user.is_superuser and not check_trainer_user_exists(request.user):
+        messages.error(request, 'Sorry, only store owners can do that.')
+        return redirect(reverse('home'))
+
+    if request.user.is_authenticated:
+        trainer_bool = check_trainer_user_exists(request.user)
+    else:
+        trainer_bool = False
+
+    trainer = get_object_or_404(TrainerProfile, id=trainer_id)
+
+    contact_mails = ContactTrainerRequest.objects.filter(trainer=trainer, read=False)
+
+    context = {
+           'trainer': trainer,
+            'contact_mails': contact_mails,
+            'is_trainer_bool': trainer_bool,
+        }
+
+    return render(request, 'trainers/view_trainer_email.html', context)
+
+@login_required
+def update_trainer_email(request, email_id):
+    """ sets the read flag to true if set """
+    if not request.user.is_superuser and not check_trainer_user_exists(request.user):
+        messages.error(request, 'Sorry, only store owners can do that.')
+        return redirect(reverse('home'))
+
+    if request.user.is_authenticated:
+        trainer_bool = check_trainer_user_exists(request.user)
+    else:
+        trainer_bool = False
+
+    trainer = None
+    if request.method == "POST":
+        print("here")
+        contact_mail = get_object_or_404(ContactTrainerRequest, pk=email_id)
+        trainer = contact_mail.trainer
+        print(request.POST)
+
+        if request.POST.get('contact_email_read') == 'read':
+            contact_mail.read = True
+            contact_mail.save()
+
+            messages.success(request,"The email status was changed to read!!")
+
+            contact_mails = ContactTrainerRequest.objects.filter(trainer=trainer, read=False) 
+
+            context = {
+                'trainer': trainer,
+                'contact_mails': contact_mails,
+                'is_trainer_bool': check_trainer_user_exists(request.user),
+            }
+
+            return render(request, 'trainers/view_trainer_email.html', context)
+        else:
+            messages.error(request,"You must click the checkbox to mark a mail as read")
+
+    contact_mails = ContactTrainerRequest.objects.filter(trainer=trainer, read=False) 
+    context = {
+           'trainer': trainer,
+            'contact_mails': contact_mails,
+            'is_trainer_bool': trainer_bool,
+        }
+
+    return render(request, 'trainers/view_trainer_email.html', context)

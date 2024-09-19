@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="overlay"></div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col text-center mt-3">
+                <h2 class="logo-font">Trainer Email for {{trainer.user.first_name}}</h2>
+                
+                <hr class="w-50 mb-1">
+                <p>Open Email</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="trainer-email-container col-10 offset-1">
+                
+                <div class="row">
+                    {% if request.user.is_authenticated and is_trainer_bool %}
+                    {% for contact_mail in contact_mails %}
+                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="w-50">
+
+                                <div class="pb-0 text-left">
+                                    <p class="mb-0"><strong>Name:</strong> {{ contact_mail.name }}</p>
+                                    <p class="mb-0"><strong>Phone:</strong> {{ contact_mail.phone }}</p>
+                                    <p class="mb-0"><strong>Email:</strong> {{ contact_mail.email }}</p>
+                                    <p class="mb-0"><strong>Date:</strong> {{ contact_mail.date_time }}</p>
+                                </div>
+                                <div class="pb-0 text-left border">
+                                    <p class="mb-0"><strong>Message:</strong> {{ contact_mail.message }}</p>
+                                </div>
+                                
+
+                                <form action="{% url 'update_trainer_email' contact_mail.id %}" method="POST">   
+                                    {% csrf_token %} 
+                                    {% if contact_mail.read == True %}
+                                        <input type="checkbox" id="contact_email_read" name="contact_email_read" value="read" checked="true">
+                                    {% else %}
+                                        <input type="checkbox" id="contact_email_read" name="contact_email_read" value="read">
+                                    {% endif %}
+                                        <label for="contact_email_read">Read Status</label><br>
+
+                                        <div class="text-right">
+                                            <button class="btn btn-black rounded-0" type="submit">Update Email Status</button>
+                                        </div>
+                                </form>
+                                
+                            </div>
+                        </div>
+                        
+                    {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="btt-button shadow-sm rounded-0 border border-black">
+        <a class="btt-link d-flex h-100">
+            <i class="fas fa-arrow-up text-black mx-auto my-auto"></i>
+        </a>
+    </div>
+    
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    <script type="text/javascript">
+		$('.btt-link').click(function(e) {
+			window.scrollTo(0,0)
+		})
+	</script>
+{% endblock %}
