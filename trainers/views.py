@@ -6,8 +6,8 @@ from django.contrib.auth.base_user import BaseUserManager
 
 from django.contrib.auth.decorators import login_required
 
-from .models import TrainerProfile
-from .forms import TrainerProfileForm, AddTrainerUserNameForm,ViewTrainerUserNameForm
+from .models import TrainerProfile, ContactTrainerRequest
+from .forms import TrainerProfileForm, AddTrainerUserNameForm,ViewTrainerUserNameForm,ContactTrainerRequestForm
 
 # Create your views here.
 def check_trainer_user_exists(username):
@@ -143,8 +143,11 @@ def trainer_detail(request, trainer_id):
 
     trainer = get_object_or_404(TrainerProfile, pk=trainer_id)
 
+    contact_form = ContactTrainerRequestForm()
+
     context = {
         'trainer': trainer,
+        'contact_form': contact_form,
         'is_trainer_bool': check_trainer_user_exists(request.user),
     }
 
@@ -167,3 +170,49 @@ def delete_trainer(request, trainer_id):
     trainer.delete()
     messages.success(request, 'Trainer deleted!')
     return redirect(reverse('view_trainers'))
+
+
+def contact_trainer(request, trainer_id):
+    """ A view for the contact trainer """
+
+    trainer = get_object_or_404(TrainerProfile, id=trainer_id)
+
+    contact_form = ContactTrainerRequestForm()
+
+    if request.method == "POST":
+        contact_form = ContactTrainerRequestForm(data=request.POST)
+        
+        if contact_form.is_valid():
+           
+            ctreq = ContactTrainerRequest()
+            ctreq.trainer = trainer
+            ctreq.name = request.POST.get('name')
+            ctreq.phone = request.POST.get('phone')
+            ctreq.email = request.POST.get('email')
+            ctreq.message = request.POST.get('message')
+            ctreq.save()
+
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                f'Contact request received! {trainer.user.first_name} will respond '
+                'within 2 working days.'
+            )
+
+            trainers = TrainerProfile.objects.all()
+
+            context = {
+                'trainers': trainers,
+                'is_trainer_bool': check_trainer_user_exists(request.user),
+            }
+            
+            return render(request, 'trainers/view_trainers.html', context)
+        else:
+            messages.ERROR("The form is not valid please check it and resubmit!! Thank you")
+    
+    context = {
+        'trainer': trainer, 
+        'contact_form': contact_form,
+    }
+
+    return render(request, 'trainers/trainer_details.html', context)

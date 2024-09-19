@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.contrib.auth.base_user import BaseUserManager
 
-from .models import TrainerProfile
+from .models import TrainerProfile, ContactTrainerRequest
 
 
 class AddTrainerUserNameForm(forms.ModelForm):
@@ -118,6 +118,41 @@ class ViewTrainerUserNameForm(forms.ModelForm):
             'first_name':'First Name',
             'last_name': 'Last Name',
             'email':'Email',
+        }
+
+        for field in self.fields:
+            if self.fields[field].required:
+                placeholder = f'{placeholders[field]} *'
+            else:
+                placeholder = placeholders[field]
+            self.fields[field].widget.attrs['placeholder'] = placeholder
+            self.fields[field].widget.attrs['class'] = 'border-black rounded-0 add_trainer-form-input'
+            self.fields[field].label = False
+
+
+class ContactTrainerRequestForm(forms.ModelForm):
+    """ contact trainer form """
+    name = forms.CharField(max_length=50, required=True)
+    phone= forms.CharField(max_length=20,  required=True)
+    email = forms.EmailField(max_length=254,  required=True)
+    message = forms.CharField(widget=forms.Textarea(attrs={"rows":"5", "required":True}))
+
+    class Meta:
+        model = ContactTrainerRequest
+        fields = ['name', 'phone', 'email', 'message']
+
+    def __init__(self, *args, **kwargs):
+        """
+        Add placeholders and classes, remove auto-generated
+        labels and set autofocus on first field
+        """
+        super().__init__(*args, **kwargs)
+
+        placeholders = {
+            'name':'Full Name',
+            'phone': 'Contact phone number',
+            'email':'Email',
+            'message':'Enter you message'
         }
 
         for field in self.fields:
