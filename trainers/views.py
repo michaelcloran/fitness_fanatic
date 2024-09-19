@@ -192,9 +192,7 @@ def contact_trainer(request, trainer_id):
             ctreq.message = request.POST.get('message')
             ctreq.save()
 
-            messages.add_message(
-                request,
-                messages.SUCCESS,
+            messages.success(request,
                 f'Contact request received! {trainer.user.first_name} will respond '
                 'within 2 working days.'
             )
@@ -207,8 +205,9 @@ def contact_trainer(request, trainer_id):
             }
             
             return render(request, 'trainers/view_trainers.html', context)
+            
         else:
-            messages.ERROR("The form is not valid please check it and resubmit!! Thank you")
+            messages.error(request,"The form is not valid please check it and resubmit!! Thank you")
     
     context = {
         'trainer': trainer, 
