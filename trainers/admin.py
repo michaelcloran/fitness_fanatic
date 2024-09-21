@@ -19,3 +19,4 @@ class ContactTrainerRequestAdmin(admin.ModelAdmin):
     """
 
     list_display = ('trainer', 'name', 'message', 'date_time', 'read',)
+

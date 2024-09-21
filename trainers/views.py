@@ -8,6 +8,11 @@ from django.contrib.auth.decorators import login_required
 
 from .models import TrainerProfile, ContactTrainerRequest
 from .forms import TrainerProfileForm, AddTrainerUserNameForm,ViewTrainerUserNameForm,ContactTrainerRequestForm
+from checkout.models import CustomersEnrolledOnCourse, ClassAttendance
+from products.models import WorkoutProgram
+
+from datetime import datetime
+from datetime import timedelta
 
 # Create your views here.
 def check_trainer_user_exists(username):
@@ -295,3 +300,90 @@ def update_trainer_email(request, email_id):
         }
 
     return render(request, 'trainers/view_trainer_email.html', context)
+
+
+@login_required
+def view_trainer_courses(request):
+    """ view the courses for trainers """
+    if not request.user.is_superuser and not check_trainer_user_exists(request.user):
+        messages.error(request, 'Sorry, only store owners can do that.')
+        return redirect(reverse('home'))
+
+    if request.user.is_authenticated:
+        trainer_bool = check_trainer_user_exists(request.user)
+    else:
+        trainer_bool = False
+
+    wo_programs = WorkoutProgram.objects.all()
+    print(wo_programs)
+
+    context = {
+        'wo_programs':wo_programs,
+        'is_trainer_bool': trainer_bool,
+    }
+
+    return render(request, 'trainers/view_trainer_courses.html', context)
+
+@login_required
+def view_class_attendance(request, wo_program_id):
+    """ view class attendances """
+    if not request.user.is_superuser and not check_trainer_user_exists(request.user):
+        messages.error(request, 'Sorry, only store owners can do that.')
+        return redirect(reverse('home'))
+
+    if request.user.is_authenticated:
+        trainer_bool = check_trainer_user_exists(request.user)
+    else:
+        trainer_bool = False
+
+    students = CustomersEnrolledOnCourse.objects.all().filter(wo_program=wo_program_id)
+
+    wo_program = get_object_or_404(WorkoutProgram, pk=wo_program_id)
+
+    if request.method == "POST":
+        print(request.POST)
+        for student_id in request.POST.getlist('student'):
+            todays_date = datetime.now()
+
+            today_min = (todays_date - timedelta(hours=6))
+
+            stud = get_object_or_404(CustomersEnrolledOnCourse, id=student_id)
+            class_already_taken = ClassAttendance.objects.all().filter( student=student_id,workout_program=wo_program, date__range=(today_min, todays_date))
+            
+            if class_already_taken.count() > 0:
+                messages.error(request,f"You have already taken class attendance for today for {class_already_taken[0]}")
+
+                wo_programs = WorkoutProgram.objects.all()
+            
+                context = {
+                    'wo_programs':wo_programs,
+                    'is_trainer_bool': trainer_bool,
+                }
+                return render(request, 'trainers/view_trainer_courses.html', context)
+            
+            class_attendee = ClassAttendance()
+            class_attendee.workout_program = wo_program
+            
+            class_attendee.student = stud
+            class_attendee.save()
+
+        messages.success(request,"You class attendances have been logged thank you!")
+
+        wo_programs = WorkoutProgram.objects.all()
+        
+        context = {
+            'wo_programs':wo_programs,
+            'is_trainer_bool': trainer_bool,
+        }
+        return render(request, 'trainers/view_trainer_courses.html', context)
+
+    class_already_taken = ClassAttendance.objects.all().filter( workout_program=wo_program)
+    context = {
+        'students':students,
+        'wo_program': wo_program,
+        'is_trainer_bool': trainer_bool,
+        'class_already_taken':class_already_taken,
+    }
+
+    return render(request, 'trainers/class_attendance.html', context)
+

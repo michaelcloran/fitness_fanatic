@@ -88,3 +88,13 @@ class CustomersEnrolledOnCourse(models.Model):
 
     def __str__(self):
         return self.order_line_item.order.full_name
+
+
+class ClassAttendance(models.Model):
+    """ This is used to track class attendances for a workout program """
+    workout_program = models.ForeignKey(WorkoutProgram, null=False, blank=False, on_delete=models.CASCADE)
+    student = models.ForeignKey(CustomersEnrolledOnCourse, null=False, blank=False, on_delete=models.CASCADE)
+    date = models.DateTimeField(null=False, blank=False, auto_now_add=True)
+
+    def __str__(self):
+        return self.student.order_line_item.order.full_name

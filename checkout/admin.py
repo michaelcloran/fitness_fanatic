@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Order, OrderLineItem, CustomersEnrolledOnCourse
+from .models import Order, OrderLineItem, CustomersEnrolledOnCourse, ClassAttendance
 
 # Register your models here.
 class OrderLineItemAdminInline(admin.TabularInline):
@@ -35,5 +35,17 @@ class CustomersEnrolledOnCourseAdmin(admin.ModelAdmin):
         'date',
     )
 
+
+
+class ClassAttendanceAdmin(admin.ModelAdmin):
+    """ Allows ClassAttendances to be viewed in Admin """
+    
+    lis_display = (
+        'workout_program', 
+        'student', 
+        'date',
+    )
+
 admin.site.register(Order, OrderAdmin)
 admin.site.register(CustomersEnrolledOnCourse, CustomersEnrolledOnCourseAdmin)
+admin.site.register(ClassAttendance, ClassAttendanceAdmin)

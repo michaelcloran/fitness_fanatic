@@ -1,6 +1,9 @@
 from django.contrib.auth.models import User
 from django.db import models
 
+
+
+
 # Create your models here.
 class TrainerProfile(models.Model):
     """ A trainer profile for managing trainers """
@@ -28,5 +31,7 @@ class ContactTrainerRequest(models.Model):
 
     def __str__(self):
         return f"Contact Trainer request from {self.name}"
+
+
 
 

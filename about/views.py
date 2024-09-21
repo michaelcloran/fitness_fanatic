@@ -23,9 +23,7 @@ def about_site(request):
         contact_form = ContactRequestForm(data=request.POST)
         if contact_form.is_valid():
             contact_form.save()
-            messages.add_message(
-                request,
-                messages.SUCCESS,
+            messages.success(
                 'Contact request received! I endeavor to respond '
                 'within 2 working days.'
             )
