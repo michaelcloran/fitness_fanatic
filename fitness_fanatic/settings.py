@@ -30,7 +30,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['8000-michaelclor-fitnessfana-t24i36frcr9.ws.codeinstitute-ide.net',]
+ALLOWED_HOSTS = ['8000-michaelclor-fitnessfana-t24i36frcr9.ws.codeinstitute-ide.net','https://fitness-fanatic-8422c1e8a4c9.herokuapp.com']
 
 CSRF_TRUSTED_ORIGINS = ['https://8000-michaelclor-fitnessfana-t24i36frcr9.ws.codeinstitute-ide.net',]
 # Application definition
