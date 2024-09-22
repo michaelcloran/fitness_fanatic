@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.contrib.auth.base_user import BaseUserManager
 
+from .widgets import CustomClearableFileInput
 from .models import TrainerProfile, ContactTrainerRequest
 
 
@@ -22,7 +23,8 @@ class AddTrainerUserNameForm(forms.ModelForm):
         model = User
         fields = ['user_name', 'password1', 'password2', 'firstname', 'lastname', 'email']
 
-    
+       
+
 
     def create(self, validated_data):
         validated_data.pop('password2') # you should pop this before create
@@ -73,7 +75,7 @@ class TrainerProfileForm(forms.ModelForm):
         model = TrainerProfile
         exclude = ('user',)
         
-
+    image = forms.ImageField(label='Image', required=False, widget=CustomClearableFileInput)  
     def __init__(self, *args, **kwargs):
         """
         Add placeholders and classes, remove auto-generated
