@@ -1,0 +1,1 @@
+web: gunicorn fitness_fanatic.wsgi:application
