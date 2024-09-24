@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect, reverse, get_object_or_404
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 
 from django.contrib.auth.models import User
@@ -7,12 +7,15 @@ from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.decorators import login_required
 
 from .models import TrainerProfile, ContactTrainerRequest
-from .forms import TrainerProfileForm, AddTrainerUserNameForm,ViewTrainerUserNameForm,ContactTrainerRequestForm
+from .forms import (
+    TrainerProfileForm, AddTrainerUserNameForm, ViewTrainerUserNameForm, ContactTrainerRequestForm
+)
 from checkout.models import CustomersEnrolledOnCourse, ClassAttendance
 from products.models import WorkoutProgram
 
 from datetime import datetime
 from datetime import timedelta
+
 
 # Create your views here.
 def check_trainer_user_exists(username):
@@ -20,10 +23,11 @@ def check_trainer_user_exists(username):
         return True
     return False
 
+
 @login_required
 def add_trainer(request):
-    """ used by admin to add a trainer to the system 
-    
+    """ used by admin to add a trainer to the system
+
     Note: I have broken the form into 2 forms
     1. for the allauth User info
     2. for the phone and bio of a trainer linked to the user
@@ -39,30 +43,39 @@ def add_trainer(request):
 
         if trainer_form.is_valid() and trainer_username_form.is_valid():
             if username_exists(trainer_username_form.cleaned_data.get('user_name')) == False:
-                    username = request.POST.get('user_name')
-                    password = request.POST.get('password1')
-                    email = request.POST.get('email')
-                    firstname = request.POST.get('firstname')
-                    lastname = request.POST.get('lastname')
-                                        
-                    # create user
-                    user = User.objects.create_user(username, email, password)
-                    user.first_name = firstname
-                    user.last_name = lastname
-                    user.save()
+                username = request.POST.get('user_name')
+                password = request.POST.get('password1')
+                email = request.POST.get('email')
+                firstname = request.POST.get('firstname')
+                lastname = request.POST.get('lastname')
 
-                    # save the trainer profile form 
-                    # remembering to get the user
-                    profile = trainer_form.save(commit=False)
-                    profile.user = user
-                    profile.save()
-                    
-                    messages.success(request, 'Trainer Profile successfully added')
-                    return redirect(reverse('trainer_detail', args=[profile.id]))
+                # create user
+                user = User.objects.create_user(username, email, password)
+                user.first_name = firstname
+                user.last_name = lastname
+                user.save()
+
+                # save the trainer profile form
+                # remembering to get the user
+                profile = trainer_form.save(commit=False)
+                profile.user = user
+                profile.save()
+
+                messages.success(request, 'Trainer Profile '
+                                 'successfully added'
+                                 )
+                return redirect(reverse('trainer_detail',
+                                args=[profile.id])
+                                )
             else:
-                messages.error(request, f"Username {trainer_username_form.cleaned_data.get('username')} already exists!.")
+                messages.error(request, f"Username "
+                               "{trainer_username_form.cleaned_data.get('username')}"
+                               " already exists!."
+                               )
         else:
-            messages.error(request, 'Add trainer profile failed. Please ensure the form is valid.')
+            messages.error(request, 'Add trainer profile failed. '
+                           'Please ensure the form is valid.'
+                           )
     else:
         trainer_form = TrainerProfileForm()
         trainer_username_form = AddTrainerUserNameForm()
@@ -75,11 +88,13 @@ def add_trainer(request):
 
     return render(request, template, context)
 
+
 def username_exists(username):
     if User.objects.filter(username=username).exists():
         return True
-    
+
     return False
+
 
 def view_trainers(request):
     """ gives a list of all trainers """
@@ -97,9 +112,10 @@ def view_trainers(request):
 
     return render(request, 'trainers/view_trainers.html', context)
 
+
 @login_required
 def edit_trainer(request, trainer_id):
-    """ Edit a trainer details 
+    """ Edit a trainer details
     Note:
     I am using 2 forms her one for the allauth User
     and one for the TrainerProfile
@@ -112,10 +128,12 @@ def edit_trainer(request, trainer_id):
     user = User.objects.get(username=trainer.user.username)
 
     if request.method == 'POST':
-        trainer_form = TrainerProfileForm(request.POST, request.FILES, instance=trainer)
+        trainer_form = TrainerProfileForm(request.POST,
+                                          request.FILES, instance=trainer
+                                          )
         trainer_username_form = ViewTrainerUserNameForm(request.POST)
         if trainer_form.is_valid() and trainer_username_form.is_valid():
-            
+
             email = request.POST.get('email')
             firstname = request.POST.get('first_name')
             lastname = request.POST.get('last_name')
@@ -128,11 +146,13 @@ def edit_trainer(request, trainer_id):
             profile = trainer_form.save(commit=False)
             profile.user = user
             profile.save()
-           
+
             messages.success(request, 'Successfully updated trainer details!')
             return redirect(reverse('trainer_detail', args=[trainer.id]))
         else:
-            messages.error(request, 'Failed to update trainer info. Please ensure the form is valid.')
+            messages.error(request, 'Failed to update trainer info. '
+                           'Please ensure the form is valid.'
+                           )
     else:
         trainer_form = TrainerProfileForm(instance=trainer)
         trainer_username_form = ViewTrainerUserNameForm(instance=user)
@@ -147,6 +167,7 @@ def edit_trainer(request, trainer_id):
     }
 
     return render(request, template, context)
+
 
 def trainer_detail(request, trainer_id):
     """ A view to show individual trainer details """
@@ -168,6 +189,7 @@ def trainer_detail(request, trainer_id):
 
     return render(request, 'trainers/trainer_details.html', context)
 
+
 @login_required
 def delete_trainer(request, trainer_id):
     """ Delete a trainer from the site """
@@ -177,7 +199,7 @@ def delete_trainer(request, trainer_id):
 
     trainer = get_object_or_404(TrainerProfile, pk=trainer_id)
     try:
-        user = User.objects.get(username = trainer.user.username)
+        user = User.objects.get(username=trainer.user.username)
         user.delete()
         messages.success(request, "The user is deleted")
     except User.DoesNotExist:
@@ -196,9 +218,9 @@ def contact_trainer(request, trainer_id):
 
     if request.method == "POST":
         contact_form = ContactTrainerRequestForm(data=request.POST)
-        
+
         if contact_form.is_valid():
-           
+
             ctreq = ContactTrainerRequest()
             ctreq.trainer = trainer
             ctreq.name = request.POST.get('name')
@@ -208,9 +230,9 @@ def contact_trainer(request, trainer_id):
             ctreq.save()
 
             messages.success(request,
-                f'Contact request received! {trainer.user.first_name} will respond '
-                'within 2 working days.'
-            )
+                             f'Contact request received! {trainer.user.first_name}'
+                             ' will respond within 2 working days.'
+                             )
 
             trainers = TrainerProfile.objects.all()
 
@@ -218,18 +240,21 @@ def contact_trainer(request, trainer_id):
                 'trainers': trainers,
                 'is_trainer_bool': check_trainer_user_exists(request.user),
             }
-            
+
             return render(request, 'trainers/view_trainers.html', context)
-            
+
         else:
-            messages.error(request,"The form is not valid please check it and resubmit!! Thank you")
-    
+            messages.error(request, "The form is not valid "
+                           "please check it and resubmit!! Thank you"
+                           )
+
     context = {
-        'trainer': trainer, 
+        'trainer': trainer,
         'contact_form': contact_form,
     }
 
     return render(request, 'trainers/trainer_details.html', context)
+
 
 @login_required
 def view_trainer_email(request, trainer_id):
@@ -245,15 +270,18 @@ def view_trainer_email(request, trainer_id):
 
     trainer = get_object_or_404(TrainerProfile, id=trainer_id)
 
-    contact_mails = ContactTrainerRequest.objects.filter(trainer=trainer, read=False)
+    contact_mails = ContactTrainerRequest.objects.filter(trainer=trainer,
+                                                         read=False
+                                                         )
 
     context = {
-           'trainer': trainer,
-            'contact_mails': contact_mails,
-            'is_trainer_bool': trainer_bool,
-        }
+        'trainer': trainer,
+        'contact_mails': contact_mails,
+        'is_trainer_bool': trainer_bool,
+    }
 
     return render(request, 'trainers/view_trainer_email.html', context)
+
 
 @login_required
 def update_trainer_email(request, email_id):
@@ -278,26 +306,32 @@ def update_trainer_email(request, email_id):
             contact_mail.read = True
             contact_mail.save()
 
-            messages.success(request,"The email status was changed to read!!")
+            messages.success(request, "The email status was changed to read!!")
 
-            contact_mails = ContactTrainerRequest.objects.filter(trainer=trainer, read=False) 
+            contact_mails = ContactTrainerRequest.objects.filter(trainer=trainer,
+                                                                 read=False
+                                                                 )
 
             context = {
                 'trainer': trainer,
                 'contact_mails': contact_mails,
-                'is_trainer_bool': check_trainer_user_exists(request.user),
+                'is_trainer_bool': trainer_bool,
             }
 
             return render(request, 'trainers/view_trainer_email.html', context)
         else:
-            messages.error(request,"You must click the checkbox to mark a mail as read")
+            messages.error(request, "You must click the checkbox "
+                           "to mark a mail as read"
+                           )
 
-    contact_mails = ContactTrainerRequest.objects.filter(trainer=trainer, read=False) 
+    contact_mails = ContactTrainerRequest.objects.filter(trainer=trainer,
+                                                         read=False
+                                                         )
     context = {
-           'trainer': trainer,
-            'contact_mails': contact_mails,
-            'is_trainer_bool': trainer_bool,
-        }
+        'trainer': trainer,
+        'contact_mails': contact_mails,
+        'is_trainer_bool': trainer_bool,
+    }
 
     return render(request, 'trainers/view_trainer_email.html', context)
 
@@ -318,11 +352,12 @@ def view_trainer_courses(request):
     print(wo_programs)
 
     context = {
-        'wo_programs':wo_programs,
+        'wo_programs': wo_programs,
         'is_trainer_bool': trainer_bool,
     }
 
     return render(request, 'trainers/view_trainer_courses.html', context)
+
 
 @login_required
 def view_class_attendance(request, wo_program_id):
@@ -348,42 +383,50 @@ def view_class_attendance(request, wo_program_id):
             today_min = (todays_date - timedelta(hours=6))
 
             stud = get_object_or_404(CustomersEnrolledOnCourse, id=student_id)
-            class_already_taken = ClassAttendance.objects.all().filter( student=student_id,workout_program=wo_program, date__range=(today_min, todays_date))
-            
+            class_already_taken = ClassAttendance.objects.all().filter(student=student_id,
+                                                                       workout_program=wo_program,
+                                                                       date__range=(today_min, todays_date)
+                                                                       )
+
             if class_already_taken.count() > 0:
-                messages.error(request,f"You have already taken class attendance for today for {class_already_taken[0]}")
+                messages.error(request, f"You have already taken class attendance "
+                               f"for today for {class_already_taken[0]}"
+                               )
 
                 wo_programs = WorkoutProgram.objects.all()
-            
+
                 context = {
-                    'wo_programs':wo_programs,
+                    'wo_programs': wo_programs,
                     'is_trainer_bool': trainer_bool,
                 }
-                return render(request, 'trainers/view_trainer_courses.html', context)
-            
+                return render(request, 'trainers/view_trainer_courses.html',
+                              context
+                              )
+
             class_attendee = ClassAttendance()
             class_attendee.workout_program = wo_program
-            
+
             class_attendee.student = stud
             class_attendee.save()
 
-        messages.success(request,"You class attendances have been logged thank you!")
+        messages.success(request, "You class attendances have been"
+                         " logged thank you!"
+                         )
 
         wo_programs = WorkoutProgram.objects.all()
-        
+
         context = {
-            'wo_programs':wo_programs,
+            'wo_programs': wo_programs,
             'is_trainer_bool': trainer_bool,
         }
         return render(request, 'trainers/view_trainer_courses.html', context)
 
-    class_already_taken = ClassAttendance.objects.all().filter( workout_program=wo_program)
+    class_already_taken = ClassAttendance.objects.all().filter(workout_program=wo_program)
     context = {
-        'students':students,
+        'students': students,
         'wo_program': wo_program,
         'is_trainer_bool': trainer_bool,
-        'class_already_taken':class_already_taken,
+        'class_already_taken': class_already_taken,
     }
 
     return render(request, 'trainers/class_attendance.html', context)
-

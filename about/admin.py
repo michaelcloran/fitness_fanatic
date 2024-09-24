@@ -11,6 +11,7 @@ class AboutAdmin(SummernoteModelAdmin):
     """
     summernote_fields = ('content',)
 
+
 @admin.register(ContactFormRequest)
 class ContactFormRequestAdmin(admin.ModelAdmin):
     """

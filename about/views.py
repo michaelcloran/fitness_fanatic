@@ -18,7 +18,7 @@ def about_site(request):
     **Template**
     :template:`about/about.html`
     """
-    
+
     if request.method == "POST":
         contact_form = ContactRequestForm(data=request.POST)
         if contact_form.is_valid():

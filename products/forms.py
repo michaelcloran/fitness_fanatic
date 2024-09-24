@@ -8,13 +8,18 @@ from .models import Product, Category, WorkoutProgram
 class DateInput(forms.DateInput):
     input_type = 'date'
 
+
 class ProductForm(forms.ModelForm):
+    """ product form """
 
     class Meta:
         model = Product
         fields = '__all__'
 
-    image = forms.ImageField(label='Image', required=False, widget=CustomClearableFileInput)     
+    image = forms.ImageField(label='Image',
+                             required=False,
+                             widget=CustomClearableFileInput
+                             )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -25,16 +30,25 @@ class ProductForm(forms.ModelForm):
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'border-black rounded-0'
 
+
 class WorkoutProgramForm(forms.ModelForm):
+    """ workout program form """
 
     today = date.today()
-    delta = datetime.timedelta(days=84) # 12 x 7
+    delta = datetime.timedelta(days=84)  # 12 x 7
 
-    start_date = forms.DateField(initial=today, required=True, widget=forms.DateInput(attrs={'type':'date'}))
-    end_date = forms.DateField(initial=(today + delta), required=True, widget=forms.DateInput(attrs={'type':'date'}))
+    start_date = forms.DateField(initial=today, required=True,
+                                 widget=forms.DateInput(attrs={'type': 'date'})
+                                 )
+    end_date = forms.DateField(initial=(today + delta), required=True,
+                               widget=forms.DateInput(attrs={'type': 'date'})
+                               )
+
     class Meta:
         model = WorkoutProgram
-        fields = ['trainer', 'start_date', 'number_weeks', 'end_date', 'class_size']
+        fields = ['trainer', 'start_date', 'number_weeks',
+                  'end_date', 'class_size'
+                  ]
 
         widgets = {
             'start_date': DateInput(),
@@ -43,8 +57,6 @@ class WorkoutProgramForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        
+
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'border-black rounded-0'
-
-

@@ -8,11 +8,13 @@ from trainers.models import TrainerProfile
 
 from .forms import ProductForm, WorkoutProgramForm
 
+
 # Create your views here.
 def check_trainer_user_exists(username):
     if TrainerProfile.objects.filter(user=username).exists():
         return True
     return False
+
 
 def all_products(request):
     """ A view to show all products, including sorting and search queries """
@@ -53,9 +55,11 @@ def all_products(request):
         if 'q' in request.GET:
             query = request.GET['q']
             if not query:
-                messages.error(request, "You didn't enter any search criteria!")
+                messages.error(request, "You didn't enter any search "
+                               "criteria!"
+                               )
                 return redirect(reverse('products'))
-            
+
             queries = Q(name__icontains=query) | Q(description__icontains=query)
             products = products.filter(queries)
 
@@ -71,6 +75,7 @@ def all_products(request):
 
     return render(request, 'products/products.html', context)
 
+
 def product_detail(request, product_id):
     """ A view to show individual product details """
 
@@ -80,15 +85,15 @@ def product_detail(request, product_id):
         trainer_bool = check_trainer_user_exists(request.user)
     else:
         trainer_bool = False
-    
+
     if product.category.name == "workoutprograms":
-        
+
         wo_program = WorkoutProgram.objects.filter(product_id=product_id).values()
         trainer = TrainerProfile.objects.filter(id=wo_program[0]['trainer_id'])
-                
+
         context = {
             'product': product,
-            'workout_program':wo_program[0],
+            'workout_program': wo_program[0],
             'trainer_name': trainer[0],
             'is_workout_program': True,
             'is_trainer_bool': trainer_bool,
@@ -96,11 +101,12 @@ def product_detail(request, product_id):
     else:
         context = {
             'product': product,
-            'is_workout_program':False,
+            'is_workout_program': False,
             'is_trainer_bool': trainer_bool,
         }
 
     return render(request, 'products/product_detail.html', context)
+
 
 @login_required
 def add_product(request):
@@ -115,13 +121,15 @@ def add_product(request):
 
         temp_category_str = request.POST.get('category')
 
-        if temp_category_str == '7': # workout program
+        if temp_category_str == '7':  # workout program
             if form.is_valid() and workout_form.is_valid():
                 product = form.save()
 
                 wo_model = WorkoutProgram()
 
-                trainer = get_object_or_404(TrainerProfile, pk=request.POST.get('trainer'))
+                trainer = get_object_or_404(TrainerProfile,
+                                            pk=request.POST.get('trainer')
+                                            )
 
                 wo_model.trainer = trainer
                 wo_model.product = product
@@ -135,14 +143,18 @@ def add_product(request):
                 messages.success(request, 'Successfully added workout!')
                 return redirect(reverse('product_details', args=[product.id]))
             else:
-                messages.error(request, 'Failed to add product. Please ensure the form is valid.')
+                messages.error(request, 'Failed to add product. '
+                               'Please ensure the form is valid.'
+                               )
         else:
             if form.is_valid():
                 product = form.save()
                 messages.success(request, 'Successfully added product!')
                 return redirect(reverse('product_details', args=[product.id]))
             else:
-                messages.error(request, 'Failed to add product. Please ensure the form is valid.')
+                messages.error(request, 'Failed to add product. '
+                               'Please ensure the form is valid.'
+                               )
     else:
         form = ProductForm()
         workout_form = WorkoutProgramForm()
@@ -155,6 +167,7 @@ def add_product(request):
 
     return render(request, template, context)
 
+
 @login_required
 def edit_product(request, product_id):
     """ Edit a product in the store """
@@ -163,16 +176,18 @@ def edit_product(request, product_id):
         return redirect(reverse('home'))
     temp_category_str = 0
     product = get_object_or_404(Product, pk=product_id)
-    temp_category_str = product.category  
+    temp_category_str = product.category
     temp_str = str(temp_category_str)
     if temp_str == 'workoutprograms':
         wo_program = get_object_or_404(WorkoutProgram, product_id=product.id)
 
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES, instance=product)
-       
+
         if temp_str == 'workoutprograms':
-            workout_form = WorkoutProgramForm(request.POST, instance=wo_program)
+            workout_form = WorkoutProgramForm(request.POST,
+                                              instance=wo_program
+                                              )
             if form.is_valid() and workout_form.is_valid():
                 form.save()
                 workout_form.save(commit=False)
@@ -180,14 +195,18 @@ def edit_product(request, product_id):
                 workout_form.save()
                 return redirect(reverse('product_details', args=[product.id]))
             else:
-                messages.error(request, 'Failed to update product. Please ensure the form is valid.')
+                messages.error(request, 'Failed to update product. '
+                               'Please ensure the form is valid.'
+                               )
         else:
             if form.is_valid():
                 form.save()
                 messages.success(request, 'Successfully updated product!')
                 return redirect(reverse('product_details', args=[product.id]))
             else:
-                messages.error(request, 'Failed to update product. Please ensure the form is valid.')
+                messages.error(request, 'Failed to update product. '
+                               'Please ensure the form is valid.'
+                               )
     else:
         form = ProductForm(instance=product)
 
@@ -206,6 +225,7 @@ def edit_product(request, product_id):
     }
 
     return render(request, template, context)
+
 
 @login_required
 def delete_product(request, product_id):

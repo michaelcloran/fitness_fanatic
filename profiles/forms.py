@@ -4,10 +4,12 @@ from django.contrib.auth.models import User
 
 
 class UpdateUserForm(forms.ModelForm):
-    #username = forms.CharField(max_length=100, required=True,widget=forms.TextInput(attrs={'class': 'form-control'}))
-
-    first_name = forms.CharField(max_length=50, required=True )
-    last_name = forms.CharField(max_length=50, required=True )
+    """
+    This is for user level input to update
+    allauth User information
+    """
+    first_name = forms.CharField(max_length=50, required=True)
+    last_name = forms.CharField(max_length=50, required=True)
     email = forms.EmailField(required=True,
                              widget=forms.TextInput(attrs={'class': 'form-control'}))
 
@@ -17,10 +19,11 @@ class UpdateUserForm(forms.ModelForm):
 
 
 class UserProfileForm(forms.ModelForm):
+    """ This is a basic user profile form """
+
     class Meta:
         model = UserProfile
         exclude = ('user',)
-        
 
     def __init__(self, *args, **kwargs):
         """

@@ -1,4 +1,6 @@
-from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponse
+from django.shortcuts import (
+    render, redirect, reverse, get_object_or_404, HttpResponse
+)
 from django.contrib import messages
 from django.views.decorators.http import require_POST
 from django.conf import settings
@@ -12,6 +14,7 @@ from bag.contexts import bag_contents
 
 import stripe
 import json
+
 
 # Create your views here.
 @require_POST
@@ -68,15 +71,17 @@ def checkout(request):
                         order_line_item.save()
 
                         if str(product.category) == 'workoutprograms':
-                            print("workoutprogram enrolling customer")
-                            wo_program = get_object_or_404(WorkoutProgram, product=product.id)
-                            customer_enroll_on_course= CustomersEnrolledOnCourse(
+                            wo_program = get_object_or_404(WorkoutProgram,
+                                                           product=product.id
+                                                           )
+                            customer_enroll_on_course = CustomersEnrolledOnCourse(
                                 order_line_item=order_line_item,
                                 wo_program=wo_program,
                             )
                             customer_enroll_on_course.save()
                     else:
-                        for size, quantity in item_data['items_by_size'].items():
+                        temp = item_data['items_by_size'].items()
+                        for size, quantity in temp:
                             order_line_item = OrderLineItem(
                                 order=order,
                                 product=product,
@@ -86,14 +91,16 @@ def checkout(request):
                             order_line_item.save()
                 except Product.DoesNotExist:
                     messages.error(request, (
-                        "One of the products in your bag wasn't found in our database. "
-                        "Please call us for assistance!")
+                        "One of the products in your bag wasn't found in our "
+                        "database. Please call us for assistance!")
                     )
                     order.delete()
                     return redirect(reverse('view_bag'))
 
             request.session['save_info'] = 'save-info' in request.POST
-            return redirect(reverse('checkout_success', args=[order.order_number]))
+            return redirect(reverse('checkout_success',
+                            args=[order.order_number])
+                            )
         else:
             messages.error(request, 'There was an error with your form. \
                 Please double check your information.')
@@ -101,7 +108,9 @@ def checkout(request):
     else:
         bag = request.session.get('bag', {})
         if not bag:
-            messages.error(request, "There's nothing in your bag at the moment")
+            messages.error(request, "There's nothing in your bag at "
+                           "the moment"
+                           )
             return redirect(reverse('products'))
 
         current_bag = bag_contents(request)
@@ -133,7 +142,9 @@ def checkout(request):
             order_form = OrderForm()
 
     if not stripe_public_key:
-        messages.warning(request, 'Stripe public key is missing. Did you forget to set it in your environment')
+        messages.warning(request, 'Stripe public key is missing. Did you '
+                         'forget to set it in your environment'
+                         )
 
     template = 'checkout/checkout.html'
     context = {
@@ -157,8 +168,6 @@ def checkout_success(request, order_number):
         # Attach the user's profile to the order
         order.user_profile = profile
         order.save()
-        
-
 
         # Save the user's info
         if save_info:
