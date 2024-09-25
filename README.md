@@ -245,7 +245,7 @@ The images used for the site were researched and got from various sources. The p
   ![View Trainer Email desktop](/readme_images/view_trainer_email_desktop.png)
 
   ![View Trainer Email mobile](/readme_images/view_trainer_email_mobile.png)
-  
+
 #### Add Workout Program
   A Workout program is like a normal product but has extra information fo instance trainer name class size, start date, end date and number of weeks
 
@@ -263,7 +263,6 @@ The images used for the site were researched and got from various sources. The p
   The class attendance is used to log attendance to a class
 
   ![The Class Attendance Form](/readme_images/class_attendance.png)
-
 
 ### About
 
