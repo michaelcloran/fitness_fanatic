@@ -30,7 +30,13 @@ On the site a trainer can administer their classes via an attendance form where 
 
 If time permits I will have typical training workout programmes like the Skogg kettlebell system, RKS kettlebell system, for weight training the Body Beast workout program, Suspension training program, Scientific stretching program. These programs will be broken down into what is covered over the duration of the course. This information will be a template link on the trainers profile template page. Where if a user is interested in a program they can read about it here.
 
+### Landing page on desktop 
+
 ![Home Landing Page of site](/readme_images/home_landing_page.png)
+
+### Landing page on mobile
+
+![Home Landing page mobile](/readme_images/home_landing_page_mobile.png)
 
 ### Categories
 
@@ -58,6 +64,7 @@ The offering for workout programs vary from the Body Beast program to the RKS Ke
 
 Marketing is done on customer satisfaction where they would use word of mouth to spread the word about a cool training program. At Fitness Fanatic a Facebook webpage was also setup to spread the word about the training programs on offer ![Facebook Page]()
 
+## Planning 
 
 ## Entity Relationship Diagram
 
@@ -183,102 +190,107 @@ Marketing is done on customer satisfaction where they would use word of mouth to
 
 ## Images
 
-This is the initial plan for images. I may need to edit and resize the images, but lets get MVP working and see!!.
+The images used for the site were researched and got from various sources. The planning and credits in raw format can be found [here](README_IMAGES.md)
 
-- The background image for the Home Landing page
+## Website Design
+  For this site I kept things simple and strongly followed the walkthrough.
 
-![Home page background](/readme_images/website_images/young-fitness-man-studio.jpg)
-
-<a href="https://www.freepik.com/free-photo/young-fitness-man-studio_8990574.htm#fromView=search&page=1&position=3&uuid=edf2a89b-a38c-4ecb-88c4-7aff10e1119e">Image by serhii_bobyk on Freepik</a>
-
-- Weights
-
-  ![York Weight set 55Kg](/readme_images/website_images/weights.webp) has size = false
-
-  price 160 Euro
-
-  ![York Wight set 70Kg](/readme_images/website_images/weights_70kg.webp) has size = false
-
-  clearance
-
-  price 180 Euro
-
-- Kettlebells
-
-  ![York Kettlebell](/readme_images/website_images/Kettlebell.webp) has size = true
-
-  price 45 Euro
-
-  ![York plastic handle Kettlebell](/readme_images/website_images/new_arrivals_kettlebell.webp) has size = true
-
-  new_arrivals
-
-  price 20 Euro
-
-- Spinning
-
-  ![York Spin Bike](/readme_images/website_images/Sping_bike.webp) has size = false
-
-  price 600 Euro
-
-- Yoga
-
-  ![York Yoga Mat](/readme_images/website_images/Yoga_mat.webp) has size = false
-
-  price 30 Euro
-
-- Trainers
-
-  - Trainer 1 Image
-
-    ![Trainer 1 image](/readme_images/website_images/Trainer_1.jpg)
-
-    <a href="https://www.freepik.com/free-photo/person-sport-gym-using-kettlebells_22271433.htm#fromView=search&page=1&position=52&uuid=288aaa53-0f86-46f9-a8f4-1f291ba28be3">Image by freepik</a>
-
-  - Trainer 2
-
-    ![Trainer 2 image](/readme_images/website_images/Trainer_2.jpg)
-
-    <a href="https://www.freepik.com/free-ai-image/athletic-person-exercising-working-out_94957668.htm#fromView=search&page=1&position=21&uuid=34773477-4b25-4b4d-b8d4-a5758dbec8db">Image by freepik</a>
-
-  - Trainer 3
-
-    ![Trainer 3 image](/readme_images/website_images/Trainer_3.jpg)
-
-    <a href="https://www.freepik.com/free-photo/person-doing-indoor-cycling_22632032.htm#fromView=search&page=1&position=2&uuid=cad0d75b-332c-4fc4-aa68-5225cc5aba13">Image by freepik</a>
-
-- Workout Programs
-
-  - Skogg Kettlebells System
-
-    ![Skogg Kettlebell System](/readme_images/website_images/skogg_kettlebell_system.jpg)
-
-    <a href="https://www.freepik.com/free-photo/sportive-guy-training-with-kettlebell-photo-handsome-man-with-good-physique-strength-motivation_16179732.htm#fromView=search&page=1&position=18&uuid=5150ab8d-0760-4e19-be73-da257224826d">Image by teksomolika on Freepik</a>
+### Header
 
 
-  - RKS Kettlebell System
+### Footer
+ Todo
 
-    ![RKS Kettlebell System](/readme_images/website_images/rks_kettlebell_workout.jpg)
+### Homepage
 
-    <a href="https://www.freepik.com/free-photo/person-sport-gym-using-kettlebells_22271411.htm#fromView=search&page=2&position=48&uuid=c71a9934-d41e-45d2-a141-99ca8215e10a">Image by freepik</a>
+  ![Home page desktop](/readme_images/home_landing_page.png)
 
-  - Body Beast Program
+  ![Home page mobile](/readme_images/home_landing_page_mobile.png)
+#### Products
 
-    ![Body Beast](/readme_images/website_images/Trainer_2.jpg)
+  ![Products listing desktop](/readme_images/products_listing_desktop.png)
 
-    <a href="https://www.freepik.com/free-ai-image/athletic-person-exercising-working-out_94957668.htm#fromView=search&page=1&position=21&uuid=34773477-4b25-4b4d-b8d4-a5758dbec8db">Image by freepik</a>
+  ![Products listing mobile](/readme_images/products_listing_mobile.png)
 
-  - Suspension Training Program
+#### Add Product
+  For the add product the logged in user has to be a site admin user or a registered trainer. Products can be of two types training equipment for sale or workout programs. I will deal with workout programs below under trainers as that case is more complex!.
 
-    ![Suspension Training Program](/readme_images/website_images/suspension_training.jpg)
+  ![Add Product desktop](/readme_images/add_product_desktop.png)
 
-    <a href="https://www.freepik.com/free-photo/young-woman-training-gym_10445545.htm#fromView=search&page=1&position=30&uuid=fcbf134b-85ab-4c96-8214-c56df3bd5271">Image by Racool_studio on Freepik</a>
+  ![Add Product mobile](/readme_images/add_product_mobile.png)
 
-  - Scientific Stretching Program
+### Courses
+  Courses or workout programs are given by registered trainers. 
+### Trainers
 
-    ![Scientific Stretching](/readme_images/website_images/scientific_stretching.jpg)
+#### Admin Add Trainer
+  For a trainer to be registered on the system site admin has to add a trainer to the trainers list. This form has to be filled in and the password shown is auto generated on a per form basis and is shown in plain text so the admin and trainer can easily use it to log on to the system. Also once this form is submitted the trainer shows up on the system and is live on the View All Trainers link on the trainers nav-bar and can be contacted immediately via the online trainer contact form!.
 
-    <a href="https://www.freepik.com/free-photo/female-athlete-doing-relaxation-exercises-while-practicing-home_26265868.htm#fromView=search&page=1&position=1&uuid=8f94638c-f232-4656-8ccb-e064bc50daa0">Image by Drazen Zigic on Freepik</a>
+  ![Add Trainer desktop](/readme_images/add_trainer_desktop.png)
+
+  ![Add Trainer mobile](/readme_images/add_trainer_mobile.png)
+
+#### View All Trainers
+  Once a trainer is registered their profile is put immediately on the view all trainers page.
+
+  ![View All Trainers desktop](/readme_images/view_trainers_desktop.png)
+
+  ![View all trainers mobile](/readme_images/view_trainers_mobile.png)
+
+##### View Trainer Detail
+  Todo
+##### View Trainer Email
+  This is a simple form to read open email tickets where if you check the checkbox and click on Update Email Status, the email is no longer visible to the trainer as the ticket is dealt with but can be viewed in admin by admin in the Django Admin App.
+
+  ![View Trainer Email desktop](/readme_images/view_trainer_email_desktop.png)
+
+  ![View Trainer Email mobile](/readme_images/view_trainer_email_mobile.png)
+  
+#### Add Workout Program
+  A Workout program is like a normal product but has extra information fo instance trainer name class size, start date, end date and number of weeks
+
+  ![Add Workout desktop](/readme_images/add_workout_desktop.png)
+
+  ![Add workout mobile](/readme_images/add_workout_mobile.png)
+
+#### View Workout Programs
+  This navbar link is used to list workout programs where once clicked upon will bring up the class attendance form
+
+  ![View Workout Programs](/readme_images/view_workout_programs.png)
+
+##### Class Attendance
+    
+  The class attendance is used to log attendance to a class
+
+  ![The Class Attendance Form](/readme_images/class_attendance.png)
+
+
+### About
+
+  The About page is to view some about information and a form to contact site admin
+
+  ![About desktop](/readme_images/about_desktop.png)
+
+  ![About mobile](/readme_images/about_mobile.png)
+
+### Profile
+  The profile is used to store user information used by the system for ease of purchasing of products. On this page it also shows an order history.
+
+  ![My profile desktop](/readme_images/my_profile_desktop.png)
+
+  ![My profile mobile](/readme_images/my_profile_mobile.png)
+
+### Bag
+  ![Shopping bag desktop](/readme_images/shopping_bag_desktop.png)
+
+  ![Shopping bag mobile](/readme_images/shopping_bag_mobile.png)
+
+### Future Features
+
+### Technologies Used
+
+
+### Deployment
 
 ## Credits
 

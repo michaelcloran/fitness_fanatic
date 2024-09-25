@@ -146,6 +146,13 @@ def add_product(request):
                 messages.error(request, 'Failed to add product. '
                                'Please ensure the form is valid.'
                                )
+                template = 'products/add_product.html'
+                context = {
+                    'form': form,
+                    'workout_form': workout_form,
+                }
+
+                return render(request, template, context)
         else:
             if form.is_valid():
                 product = form.save()

@@ -1,6 +1,7 @@
 from datetime import date
 import datetime
 from django import forms
+from django.core.exceptions import ValidationError
 from .widgets import CustomClearableFileInput
 from .models import Product, Category, WorkoutProgram
 
@@ -54,6 +55,17 @@ class WorkoutProgramForm(forms.ModelForm):
             'start_date': DateInput(),
             'end_date': DateInput(),
         }
+
+    def clean(self):
+        cleaned_data = super().clean()
+        start_date = cleaned_data.get('start_date')
+        end_date = cleaned_data.get('end_date')
+
+        if start_date >= end_date:
+            raise ValidationError(
+                 "Start date must be less than end date!!.")
+
+        return self.cleaned_data
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

@@ -75,6 +75,16 @@
                 }
             }
         });
+
+        let selectedElement = document.querySelector("#id_category");
+        if(selectedElement.value == 7){
+            $(".workout-program-form").removeClass("default-hidden");
+            document.getElementById("id_trainer").required = true;
+            document.getElementById("id_class_size").required = true;
+            document.getElementById("id_start_date").required = true;
+            document.getElementById("id_number_weeks").required = true;
+            document.getElementById("id_end_date").required = true;
+        }
     </script>
 
 {% endblock %}
