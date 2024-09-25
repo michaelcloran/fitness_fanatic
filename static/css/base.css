@@ -326,7 +326,7 @@ input[name='q']::placeholder {
     }
 
     #delivery-banner h4 {
-        font-size: .9rem;
+        font-size: .9rem !important;
     }
 
     .btn.btn-outline-black.rounded-0,
