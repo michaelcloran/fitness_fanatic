@@ -111,7 +111,8 @@ def product_detail(request, product_id):
 @login_required
 def add_product(request):
     """ Add a product to the store """
-    if not request.user.is_superuser and not check_trainer_user_exists(request.user):
+    t_bool = check_trainer_user_exists(request.user)
+    if not request.user.is_superuser and not t_bool:
         messages.error(request, 'Sorry, only site admin can do that.')
         return redirect(reverse('home'))
     temp_category_str = 0
@@ -139,7 +140,7 @@ def add_product(request):
                 wo_model.end_date = request.POST.get('end_date')
 
                 wo_model.save()
-                
+
                 messages.success(request, 'Successfully added workout!')
                 return redirect(reverse('product_details', args=[product.id]))
             else:
@@ -178,7 +179,8 @@ def add_product(request):
 @login_required
 def edit_product(request, product_id):
     """ Edit a product in the store """
-    if not request.user.is_superuser and not check_trainer_user_exists(request.user):
+    t_bool = check_trainer_user_exists(request.user)
+    if not request.user.is_superuser and not t_bool:
         messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
     temp_category_str = 0
@@ -237,7 +239,8 @@ def edit_product(request, product_id):
 @login_required
 def delete_product(request, product_id):
     """ Delete a product from the store """
-    if not request.user.is_superuser and not check_trainer_user_exists(request.user):
+    t_bool = check_trainer_user_exists(request.user)
+    if not request.user.is_superuser and not t_bool:
         messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
 

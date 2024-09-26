@@ -8,7 +8,10 @@ from django.contrib.auth.decorators import login_required
 
 from .models import TrainerProfile, ContactTrainerRequest
 from .forms import (
-    TrainerProfileForm, AddTrainerUserNameForm, ViewTrainerUserNameForm, ContactTrainerRequestForm
+    TrainerProfileForm,
+    AddTrainerUserNameForm,
+    ViewTrainerUserNameForm,
+    ContactTrainerRequestForm
 )
 from checkout.models import CustomersEnrolledOnCourse, ClassAttendance
 from products.models import WorkoutProgram
@@ -42,7 +45,8 @@ def add_trainer(request):
         trainer_username_form = AddTrainerUserNameForm(request.POST)
 
         if trainer_form.is_valid() and trainer_username_form.is_valid():
-            if username_exists(trainer_username_form.cleaned_data.get('user_name')) == False:
+            t_uname = trainer_username_form.cleaned_data.get('user_name')
+            if not username_exists(t_uname):
                 username = request.POST.get('user_name')
                 password = request.POST.get('password1')
                 email = request.POST.get('email')
@@ -68,8 +72,9 @@ def add_trainer(request):
                                 args=[profile.id])
                                 )
             else:
+                t_str = f"{trainer_username_form.cleaned_data.get('username')}"
                 messages.error(request, f"Username "
-                               "{trainer_username_form.cleaned_data.get('username')}"
+                               f"{t_str}"
                                " already exists!."
                                )
         else:
@@ -120,7 +125,8 @@ def edit_trainer(request, trainer_id):
     I am using 2 forms her one for the allauth User
     and one for the TrainerProfile
     """
-    if not request.user.is_superuser and not check_trainer_user_exists(request.user):
+    t_bool = check_trainer_user_exists(request.user)
+    if not request.user.is_superuser and not t_bool:
         messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
 
@@ -230,7 +236,8 @@ def contact_trainer(request, trainer_id):
             ctreq.save()
 
             messages.success(request,
-                             f'Contact request received! {trainer.user.first_name}'
+                             'Contact request received! '
+                             f'{trainer.user.first_name}'
                              ' will respond within 2 working days.'
                              )
 
@@ -259,7 +266,8 @@ def contact_trainer(request, trainer_id):
 @login_required
 def view_trainer_email(request, trainer_id):
     """ based on trainer id get mail that is unread """
-    if not request.user.is_superuser and not check_trainer_user_exists(request.user):
+    t_bool = check_trainer_user_exists(request.user)
+    if not request.user.is_superuser and not t_bool:
         messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
 
@@ -286,7 +294,8 @@ def view_trainer_email(request, trainer_id):
 @login_required
 def update_trainer_email(request, email_id):
     """ sets the read flag to true if set """
-    if not request.user.is_superuser and not check_trainer_user_exists(request.user):
+    t_bool = check_trainer_user_exists(request.user)
+    if not request.user.is_superuser and not t_bool:
         messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
 
@@ -339,7 +348,8 @@ def update_trainer_email(request, email_id):
 @login_required
 def view_trainer_courses(request):
     """ view the courses for trainers """
-    if not request.user.is_superuser and not check_trainer_user_exists(request.user):
+    t_bool = check_trainer_user_exists(request.user)
+    if not request.user.is_superuser and not t_bool:
         messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
 
@@ -362,7 +372,8 @@ def view_trainer_courses(request):
 @login_required
 def view_class_attendance(request, wo_program_id):
     """ view class attendances """
-    if not request.user.is_superuser and not check_trainer_user_exists(request.user):
+    t_bool = check_trainer_user_exists(request.user)
+    if not request.user.is_superuser and not t_bool:
         messages.error(request, 'Sorry, only store owners can do that.')
         return redirect(reverse('home'))
 
@@ -389,7 +400,8 @@ def view_class_attendance(request, wo_program_id):
                                                                        )
 
             if class_already_taken.count() > 0:
-                messages.error(request, f"You have already taken class attendance "
+                messages.error(request,
+                               f"You have already taken class attendance "
                                f"for today for {class_already_taken[0]}"
                                )
 

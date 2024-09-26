@@ -284,12 +284,15 @@ The images used for the site were researched and got from various sources. The p
 
   ![Shopping bag mobile](/readme_images/shopping_bag_mobile.png)
 
-### Future Features
+## Future Features
 
-### Technologies Used
+## Technologies Used
+  - HTML
+  - Python
+  - CSS
+  - JavaScript
 
-
-### Deployment
+## Deployment
 
 ## Credits
 

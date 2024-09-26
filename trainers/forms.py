@@ -12,7 +12,10 @@ class AddTrainerUserNameForm(forms.ModelForm):
     """ this form is used for trainer creation """
     default_password = BaseUserManager().make_random_password()
 
-    user_name = forms.CharField(initial='trainer', max_length=20, required=True)
+    user_name = forms.CharField(initial='trainer',
+                                max_length=20,
+                                required=True
+                                )
     password1 = forms.CharField(initial=default_password, required=True)
     password2 = forms.CharField(initial=default_password, required=True)
     firstname = forms.CharField(max_length=50, required=True)
@@ -53,7 +56,7 @@ class AddTrainerUserNameForm(forms.ModelForm):
 
         placeholders = {
             'user_name': 'Trainer',
-            'password1':'Password',
+            'password1': 'Password',
             'password2': 'Retype Password',
             'firstname': 'First Name',
             'lastname': 'Last Name',
@@ -67,7 +70,8 @@ class AddTrainerUserNameForm(forms.ModelForm):
                 else:
                     placeholder = placeholders[field]
                 self.fields[field].widget.attrs['placeholder'] = placeholder
-                self.fields[field].widget.attrs['class'] = 'border-black rounded-0 add_trainer-form-input'
+                str = 'border-black rounded-0 add_trainer-form-input'
+                self.fields[field].widget.attrs['class'] = str
                 self.fields[field].label = False
 
 
@@ -75,12 +79,12 @@ class TrainerProfileForm(forms.ModelForm):
     class Meta:
         model = TrainerProfile
         exclude = ('user',)
-    
+
     image = forms.ImageField(label='Image',
                              required=False,
                              widget=CustomClearableFileInput
                              )
- 
+
     def __init__(self, *args, **kwargs):
         """
         Add placeholders and classes, remove auto-generated
@@ -99,7 +103,8 @@ class TrainerProfileForm(forms.ModelForm):
                 else:
                     placeholder = placeholders[field]
                 self.fields[field].widget.attrs['placeholder'] = placeholder
-            self.fields[field].widget.attrs['class'] = 'border-black rounded-0 add_trainer-form-input'
+                str = 'border-black rounded-0 add_trainer-form-input'
+            self.fields[field].widget.attrs['class'] = str
             self.fields[field].label = False
 
 
@@ -123,7 +128,7 @@ class ViewTrainerUserNameForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
 
         placeholders = {
-            'first_name':'First Name',
+            'first_name': 'First Name',
             'last_name': 'Last Name',
             'email': 'Email',
         }
@@ -134,16 +139,19 @@ class ViewTrainerUserNameForm(forms.ModelForm):
             else:
                 placeholder = placeholders[field]
             self.fields[field].widget.attrs['placeholder'] = placeholder
-            self.fields[field].widget.attrs['class'] = 'border-black rounded-0 add_trainer-form-input'
+            str = 'border-black rounded-0 add_trainer-form-input'
+            self.fields[field].widget.attrs['class'] = str
             self.fields[field].label = False
 
 
 class ContactTrainerRequestForm(forms.ModelForm):
     """ contact trainer form """
     name = forms.CharField(max_length=50, required=True)
-    phone= forms.CharField(max_length=20,  required=True)
-    email = forms.EmailField(max_length=254,  required=True)
-    message = forms.CharField(widget=forms.Textarea(attrs={"rows": "5", "required": True}))
+    phone = forms.CharField(max_length=20,  required=True)
+    email = forms.EmailField(max_length=254, required=True)
+    message = forms.CharField(widget=forms.Textarea(attrs={"rows": "5",
+                              "required": True})
+                              )
 
     class Meta:
         model = ContactTrainerRequest
@@ -157,7 +165,7 @@ class ContactTrainerRequestForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
 
         placeholders = {
-            'name':'Full Name',
+            'name': 'Full Name',
             'phone': 'Contact phone number',
             'email': 'Email',
             'message': 'Enter you message'
@@ -169,5 +177,6 @@ class ContactTrainerRequestForm(forms.ModelForm):
             else:
                 placeholder = placeholders[field]
             self.fields[field].widget.attrs['placeholder'] = placeholder
-            self.fields[field].widget.attrs['class'] = 'border-black rounded-0 add_trainer-form-input'
+            str = 'border-black rounded-0 add_trainer-form-input'
+            self.fields[field].widget.attrs['class'] = str
             self.fields[field].label = False
