@@ -17,11 +17,11 @@
                 <div class="image-container my-5">
                     {% if trainer.image %}
                         <a href="{{ trainer.image.url }}" target="_blank">
-                            <img class="card-img-top img-fluid" src="{{ trainer.image.url }}" alt="{{ trainer.name }}">
+                            <img class="card-img-top img-fluid" src="{{ trainer.image.url }}" alt="{{ trainer.user.first_name }}">
                         </a>
                         {% else %}
                         <a href="">
-                            <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ trainer.name }}">
+                            <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ trainer.user.first_name }}">
                         </a>
                     {% endif %}
                 </div>
@@ -32,13 +32,13 @@
                     
                         <small class="ml-3">
                             {% if request.user.is_superuser or is_trainer_bool %}
-                            <a href="{% url 'edit_trainer' trainer.id %}">Edit</a> |{% endif %} 
+                            <a href="{% url 'edit_trainer' trainer.id %}" style="color:#0000B8;">Edit</a> |{% endif %} 
                             {% if request.user.is_superuser %}
                             <a class="text-danger btn-delete-trainer" data-trainer_id="{{trainer.id}}">Delete</a>
                             {% endif %}
                         </small>
                         {% if request.user.is_superuser or is_trainer_bool %}
-                        <a href="{% url 'view_trainer_email' trainer.id %}">View Emails</a>
+                        <a href="{% url 'view_trainer_email' trainer.id %}" style="color:#0000B8;"">View Emails</a>
                         {% endif %}
                    
                     <p class="mt-3">{{ trainer.bio }}</p>
