@@ -9,6 +9,10 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <meta name="author" content="Michael Cloran" >
+        <meta name="description" content="Fitness website, training website, buy weights, buy kettlebells, enroll on fitness programs">
+        <meta name="keywords" content="weights, kettlebells, spinning, yoga, stretching, workout programs">
     {% endblock %}
 
     {% block extra_meta %}
@@ -56,21 +60,23 @@
         <div id="topnav" class="row bg-white pt-lg-2 d-none d-lg-flex">
             <div class="col-12 col-lg-4 my-auto py-1 py-lg-0 text-center text-lg-left">
                 <a href="{% url 'home' %}" class="nav-link main-logo-link">
-                    <h2 class="logo-font text-black my-0"><strong>Fitness Fanatic</strong></h2>
+                    <h1 class="logo-font text-black my-0"><strong>Fitness Fanatic</strong></h1>
                 </a>
             </div>
             <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
                 <form method="GET" action="{% url 'products' %}">
                     <div class="input-group w-100">
-                      <input class="form-control border border-black rounded-0" type="text" name="q" placeholder="Search our site">
+                      <input class="form-control border border-black rounded-0" id="q" aria-label="Search site" aria-labelledby="q" type="text" name="q" placeholder="Search our site">
+                      <label for="q" class="sr-only">Search</label>
                       <div class="input-group-append">
-                        <button class="form-control btn btn-black border border-black rounded-0" type="submit">
+                        <button class="form-control btn btn-black border border-black rounded-0" aria-label="Submit button" type="submit">
                           <span class="icon">
                             <i class="fas fa-search"></i>
-                          </button>
-                        </div>
+                          </span>
+                        </button>
                       </div>
-                    </form>
+                    </div>
+                  </form>
             </div>
             <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
                 <ul class="list-inline list-unstyled text-center text-lg-right my-0">

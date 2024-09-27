@@ -291,8 +291,221 @@ The images used for the site were researched and got from various sources. The p
   - Python
   - CSS
   - JavaScript
+  - Django used as the Python framework for the site
+  - AWS S3 used for online static and media file storage
+  - PostgresSQL used as the relational database management
+  - Heroku used for hosting the site
+  - GitHub for storing repository of development
+  - GitPod used for cloud IDE
+  - Balsamiq used for wireframing
+  - Bootstrap 4 used for frontend framework
+  - favicon.io used to make favicon for the site
+
+## Search Engine Optimization (SEO)
+
+### Keywords
+
+### Metadata
+
+### Sitemap
+
+### Robots
 
 ## Deployment
+  This project was developed using GitPod. The web application is deployed on Heroku. All Static and media files are stored via Amazon AWS S3. The repository is hosted on GitHub.
+
+### Clone GitHub Repository
+
+  By Cloning a GitHub repository you can create a local copy of a GitHub remote repository.
+  Cloning is done via the following steps
+
+  - 1. Login to GitHub
+  - 2. Navigate to the main GitHub repository that you want to clone
+  - 3. Click on the green dropdown button Code
+  - 4. To clone the repository using HTTPS under HTTPS copy the link
+  - 5. Open command prompt
+  - 6. Change to the directory you want to create the repository in
+  - 7. Type git clone and paste the URL you copied in step 4.
+    ``` $ git clone https://github.com/your-username/your-repository```
+  - 8. Press enter. Your local copy of the repository will be created
+
+For this project GitPod IDE was used so I just had to create a workspace and connect to GitHub by choosing the repository.
+Once the workspace opened in GitPod 
+
+To install the dependencies from the command line in GitPod
+pip3 install -r requirements.txt
+
+I setup an env.py file with the following constants
+```
+import os
+
+os.environ.setdefault('STRIPE_PUBLIC_KEY', '<the key>')
+
+os.environ.setdefault('STRIPE_SECRET_KEY', '<secret key>')
+
+os.environ.setdefault('SECRET_KEY', '<secret key>')
+
+os.environ.setdefault("STRIPE_WH_SECRET", "<stripe key>")
+
+os.environ.setdefault("DEVELOPMENT", "True")
+```
+
+ Note: for the STRIP_WH_SECRET an endpoint had to be created https://<host_url>/checkout/wh/
+ navigate to webhooks and click on you link and reveal signing secret and copy this into STRIP_WH_SECRET
+
+Make migrations and setup initial database operations
+on the CLI in GitPod enter python3 manage.py makemigrations
+then
+python3 manage.py migrate
+
+To setup the categories and products copy over the media file and run
+python3 manage.py loaddata categories
+python3 manage.py loaddata products
+
+Then I created a superuser by entering
+python3 manage.py createsupreruser
+
+### Deployment on Heroku
+
+This project uses Heroku for production and static and media files are stored via a bucket on Amazon AWS S3. To deploy on Heroku
+
+  - 1. Naviage to heroku.com and login and create new app for your project and set the region and click on create app.
+  - 2. Connect Heroku app to github repository 
+  - 3. Configure variables on Heroku by navigating to settings and click on Revela Config Vars 
+
+Variable | Key
+--- | ---
+AWS_ACCESS_KEY_ID | Access key for AWS 
+AWS_SECRET_ACCESS_KEY | secret key for AWS 
+DATABASE_URL | database url got from code institute 
+EMAIL_HOST_PASS | password for email sender 
+EMAIL_HOST_USER | email address used 
+PORT | 8000 
+SECRET_KEY | Django secrey key 
+STRIPE_PUBLIC_KEY | stripe public key 
+STRIPE_SECRET_KEY | stripe secret key 
+STRIPE_WH_SECRET | stripe webhook secret key 
+USE_AWS | True 
+
+  - 4. Then create a Procfile with contents
+  web: gunicorn fitness_fanatic.wsgi:application
+
+  - 5. add hostname of heroku app to allowed hosts in settings.py
+
+  I have setup the debug to be true if the DEVELOPMENT is found in the environment variables which will be true for localhost.
+
+  - 6. on Heroku under deply for your app click Deploy Branch to deploy your app
+
+### Amazon AWS S3
+
+This project uses Amazon Web Servies (AWS https://aws.amazon.com/) to store static and media files.
+
+Once youve created an AWS account and logged in. You can follow the following steps to setup your static and media files storage.
+
+From the AWS Management Console.
+
+  - Search for S3
+  - Create a new bucket, give it a name matching your Heroku app name and choose a region closest to you
+  - Uncheck Block all public access and acknowledge that the bucket will be public.
+  - From Object ownership make sure ACLs are enabled and Bucket owner preferred is selected
+  - From the Permisssions tab paste in the following CORS configuration
+
+  ```
+    [
+  {
+      "AllowedHeaders": [
+          "Authorization"
+      ],
+      "AllowedMethods": [
+          "GET"
+      ],
+      "AllowedOrigins": [
+          "*"
+      ],
+      "ExposeHeaders": []
+  }
+]
+  ```
+
+  - Copy your ARN string
+  - From the Bucket Policy tab, select the Policy Generator link and set
+    - Policy type: S3 Bucket Policy
+    - Effect: Allow
+    - Principal *
+    - Actions: GetObject()
+    - Amazon Resource Name (ARN): paste your ARN here
+    - Click add Statement
+    - Click Generate Policy
+    - Copy entire Policy and paste it into the Bucket Policy editor
+
+    ```
+    {
+    "Version": "2012-10-17",
+    "Id": "Policy1726973504037",
+    "Statement": [
+        {
+            "Sid": "Stmt1726973489892",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::bucket name/*"
+        }
+    ]
+    }
+    ```
+    
+    - Click save
+    - From the Access Control List (ACL) section click edit and enable List for Everyone (public access) and accept the warning box.
+
+### IAM
+  Back on the AWS service menu, search for IAM (Identity and access management). Once on the IAM page
+
+  - From User Groups click Create New Group
+  - From User Groups, select newly created group and go to the permissions tab
+  - Open the Add Permissions dropdown and click on Attach Policies
+  - select the policy then click on Add Permissions at the bottom
+  - From the JSON tab select Import Managed Policy link
+    - Search for S3 select AmazonS3FullAccess policy and import
+    
+    ```
+    {
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "Statement1",
+            "Effect": "Allow",
+            "Action": [
+                "s3:*"
+            ],
+            "Resource": [
+                "arn:aws:s3:::bucket name",
+                "arn:aws:s3:::bucket name/*"
+            ]
+        }
+    ]
+    }
+    ```
+
+    - Click Review Policy
+    - Provide a description a brief overview of what it for
+    - Click Create Policy 
+
+  - From User Groups click on group created
+  - Click Attach Policy
+  - Search for ther policy youve just created select it and click on Attach Policy
+  - From User Groups click Add User
+  - From Select AWS access type select Programmatic Access
+  - Select the group to add to your user (created above)
+  - Click Create User
+  - under the User Summary on the right click on Create Access Key
+    - set AWS_ACCESS_KEY_ID = Access Key ID
+    - AWS_SECRET_ACCESS_KEY = Secret Access Key
+  
+### Final Setup
+  - Back within S3 buckets create folder media
+  - copy over existing media files to this folder
+  - Under Manage Public Permisssions select Grant public read access to this object
+
 
 ## Credits
 

@@ -13,6 +13,17 @@ body {
 #delivery-banner h4 {
     font-size: 1.5rem;
 }
+
+/* for wave compliance */
+.sr-only{
+    position:absolute;
+    left:-10000px;
+    top:auto;
+    width:1px;
+    height:1px;
+    overflow:hidden;
+ }
+
 /* from Bulma */
 .icon {
     align-items: center;
@@ -104,7 +115,7 @@ a.category-badge > span.badge:hover {
 }
 
 input[name='q']::placeholder {
-    color: #aab7c4;
+    color: #aab7c4; /*#aab7c4;*/
 }
 
 /* ------------------------------- bootstrap toasts */
