@@ -47,7 +47,7 @@
                                             
                                                 <small class="ml-3">
                                                     {% if request.user.is_superuser or is_trainer_bool == True %}
-                                                    <a href="{% url 'edit_trainer' trainer.id %}">Edit</a> | {% endif %} 
+                                                    <a href="{% url 'edit_trainer' trainer.id %}" style="color:#0000B8;">Edit</a> | {% endif %} 
                                                     {% if request.user.is_superuser %}<button class="btn-delete-trainer btn-danger" data-trainer_id="{{trainer.id}}">Delete</button>
                                                     {% endif %}
                                                 </small>
