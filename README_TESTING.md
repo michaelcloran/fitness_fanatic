@@ -1,4 +1,15 @@
 [back to main Readme](README.md)
+
+## Code Validation
+
+### HTML Validation
+
+### CSS Validation
+
+### Python Validation
+
+### JavaScript Validation
+
 ## Wave Web AIM
 
 Page | Errors | Alerts | Result
@@ -18,22 +29,28 @@ view trainer details | 0 | skipped heading level | pass
 
 ## Lighthouse testing
 
-It was noticed that for lighthouse testing that it was best to use incognito mode on Google Chrome. It was also noticed that i get different values if I have my VPN active
+It was noticed that for lighthouse testing that it was best to use incognito mode on Google Chrome. It was also noticed that i get different values if I have my VPN active or if I connect outside my dedicated firewall.
 
 Page | Performance | Accessibility | Best Practice | SEO
 --- | --- | --- | --- | ---
-Home (landing page) | 96 | 93 | 100 | 100
-all products listing by price | 91 | 94 | 100 | 91
-all training equipment | 92 | 94 | 100 | 91
+Home (landing page desktop) | 96 | 93 | 100 | 100
+Home (mobile) | 87 | 92 | 100 | 100
+all products listing by price (desktop) | 91 | 94 | 100 | 91
+all products listing (mobile) | 72 | 95 | 100 | 91
+all training equipment (desktop) | 92 | 94 | 100 | 91
+all training equipment (mobile) | 73 | 95 | 100 | 91
 courses | | | | todo
-all specials | 92 | 94 | 100 | 91
+all specials (desktop) | 92 | 94 | 100 | 91
+all specials (mobile) | 69 | 95 | 100 | 91
 trainers view all trainers | | | | todo
 trainers add workout program | | | | todo
 trainers view workout programs | | | | todo
-about | 95 | 93 | 100 | 100
-my account project management | 90 | 94 | 100 | 100
-my account my profile | 91 | 94 | 100 | 100
-
+about (desktop) | 95 | 93 | 100 | 100
+about (mobile) | 82 | 95 | 100 | 100
+my account project management (desktop) | 90 | 94 | 100 | 100
+my account project management (mobile) | 82 | 93 | 100 | 100
+my account my profile (desktop) | 91 | 94 | 100 | 100
+my account my profile (mobile) | 77 | 95 | 100 | 100
 
 
 

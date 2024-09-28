@@ -433,7 +433,12 @@ def view_class_attendance(request, wo_program_id):
         }
         return render(request, 'trainers/view_trainer_courses.html', context)
 
-    class_already_taken = ClassAttendance.objects.all().filter(workout_program=wo_program)
+    todays_date = datetime.now()
+
+    today_min = (todays_date - timedelta(hours=6))
+    class_already_taken = ClassAttendance.objects.all().filter(workout_program=wo_program,
+                                                               date__range=(today_min, todays_date)
+                                                               )
     context = {
         'students': students,
         'wo_program': wo_program,

@@ -74,10 +74,11 @@ def checkout(request):
                             wo_program = get_object_or_404(WorkoutProgram,
                                                            product=product.id
                                                            )
-                            customer_enroll_on_course = CustomersEnrolledOnCourse(
-                                order_line_item=order_line_item,
-                                wo_program=wo_program,
-                            )
+                            
+                            customer_enroll_on_course = CustomersEnrolledOnCourse()
+                            customer_enroll_on_course.order_line_item = order_line_item
+                            customer_enroll_on_course.wo_program = wo_program
+
                             customer_enroll_on_course.save()
                     else:
                         temp = item_data['items_by_size'].items()
