@@ -43,7 +43,15 @@ class CustomersEnrolledOnCourseAdmin(admin.ModelAdmin):
 class ClassAttendanceAdmin(admin.ModelAdmin):
     """ Allows ClassAttendances to be viewed in Admin """
 
-    lis_display = (
+    readonly_fields = ('date',)
+
+    fields = (
+        'workout_program',
+        'student',
+        'date',
+    )
+
+    list_display = (
         'workout_program',
         'student',
         'date',
