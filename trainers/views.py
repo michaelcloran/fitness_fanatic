@@ -41,7 +41,7 @@ def add_trainer(request):
         return redirect(reverse('home'))
 
     if request.method == 'POST':
-        trainer_form = TrainerProfileForm(request.POST, request.FILES, auto_id=False)
+        trainer_form = TrainerProfileForm(request.POST, request.FILES)
         trainer_username_form = AddTrainerUserNameForm(request.POST)
 
         if trainer_form.is_valid() and trainer_username_form.is_valid():
@@ -82,7 +82,7 @@ def add_trainer(request):
                            'Please ensure the form is valid.'
                            )
     else:
-        trainer_form = TrainerProfileForm(auto_id=False)
+        trainer_form = TrainerProfileForm()
         trainer_username_form = AddTrainerUserNameForm()
 
     template = 'trainers/add_trainer.html'
