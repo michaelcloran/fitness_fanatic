@@ -18,7 +18,7 @@ from products.models import WorkoutProgram
 
 from datetime import datetime
 from datetime import timedelta
-
+from django.utils import timezone
 
 # Create your views here.
 def check_trainer_user_exists(username):
@@ -369,6 +369,14 @@ def view_trainer_courses(request):
     return render(request, 'trainers/view_trainer_courses.html', context)
 
 
+def check_update_needed(lst1, lst2):
+    """ checks if student not in list """
+    updateit = list(set(lst2) - set(lst1))
+    
+    return updateit
+
+
+
 @login_required
 def view_class_attendance(request, wo_program_id):
     """ view class attendances """
@@ -389,31 +397,38 @@ def view_class_attendance(request, wo_program_id):
     if request.method == "POST":
         print(request.POST)
         for student_id in request.POST.getlist('student'):
-            todays_date = datetime.now()
+                     
+            todays_date = timezone.now()
 
             today_min = (todays_date - timedelta(hours=6))
 
             stud = get_object_or_404(CustomersEnrolledOnCourse, id=student_id)
+
+            check_for_up = check_update_needed(request.POST.getlist('student'), request.POST.getlist('student.hidden'))
+            print(f"Checking for update {check_for_up} student  {student_id}")
+            for item_id in check_for_up:
+                print(f"item_id {item_id}")
+                ClassAttendance.objects.filter(student=item_id,
+                                               workout_program=wo_program,
+                                               date__range=(today_min, todays_date)
+                                               ).delete()
+            
             class_already_taken = ClassAttendance.objects.all().filter(student=student_id,
                                                                        workout_program=wo_program,
                                                                        date__range=(today_min, todays_date)
                                                                        )
-
             if class_already_taken.count() > 0:
-                messages.error(request,
-                               f"You have already taken class attendance "
-                               f"for today for {class_already_taken[0]}"
-                               )
-
+                messages.warning(request,
+                             "You have already taken class attendance "
+                             "for today"
+                             )
                 wo_programs = WorkoutProgram.objects.all()
 
                 context = {
                     'wo_programs': wo_programs,
                     'is_trainer_bool': trainer_bool,
                 }
-                return render(request, 'trainers/view_trainer_courses.html',
-                              context
-                              )
+                return render(request, 'trainers/view_trainer_courses.html', context)
 
             class_attendee = ClassAttendance()
             class_attendee.workout_program = wo_program
@@ -421,6 +436,9 @@ def view_class_attendance(request, wo_program_id):
             class_attendee.student = stud
             class_attendee.save()
 
+        
+
+        
         messages.success(request, "You class attendances have been"
                          " logged thank you!"
                          )
