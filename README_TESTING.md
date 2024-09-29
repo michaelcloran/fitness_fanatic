@@ -6,9 +6,15 @@
 
 HTML Validation was done with the W3 HTML Validator (https://validator.w3.org/nu/)
 
-Page | URL | Logged In Status | Result
---- | --- | --- | ---
-Landing Page | / | Guest |
+Page | URL | Logged In Status | Result | info
+--- | --- | --- | --- | ---
+Landing Page | / | Guest | pass | 1 warning
+Products | products/?sort=price&direction=asc | Guest | Pass |
+Training equipment | products/?category=freeweights,kettlebells,spinning,yogamats | Guest | Pass |
+Courses | products/?category=workoutprograms | Guest | Pass |
+Special Offers | products/?category=new_arrivals,clearance | Guest | Pass |
+trainers view all trainers | trainers/alltrainers/ | Guest | Pass |
+trainer details | trainers/trainerdetails/1 | Guest | 
 
 ### CSS Validation
 
