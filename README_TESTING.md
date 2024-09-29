@@ -32,8 +32,9 @@ Product details | products/3/ | Admin | Pass |
 Shopping bag | bag/ | Admin | Pass |
 Checkout | checkout/ | Admin | Pass | 
 
-trainers add trainer | 
+trainers add trainer | trainers/ | Admin | Pass |
 trainers view all trainers | trainers/alltrainers/ | Admin | Pass |
+trainers add workout program | products/add/ | Admin |
 
 
 
