@@ -25,12 +25,17 @@ Products | products/?sort=price&direction=asc | Admin | Pass |
 Training equipment | products/?category=freeweights,kettlebells,spinning,yogamats | Admin | Pass |
 Courses | products/?category=workoutprograms | Admin | Pass |
 Special Offers | products/?category=new_arrivals,clearance | Admin | Pass |
-trainers view all trainers | trainers/alltrainers/ | Admin | Pass |
+
 trainer details | trainers/trainerdetails/1 | Admin | Pass |
 about | about/ | Admin | Pass |
 Product details | products/3/ | Admin | Pass |
-Shopping bag | bag/ | Admin |  |
-Checkout | checkout/ | Admin |  | 
+Shopping bag | bag/ | Admin | Pass |
+Checkout | checkout/ | Admin | Pass | 
+
+trainers add trainer | 
+trainers view all trainers | trainers/alltrainers/ | Admin | Pass |
+
+
 
 ### CSS Validation
 
