@@ -8,13 +8,29 @@ HTML Validation was done with the W3 HTML Validator (https://validator.w3.org/nu
 
 Page | URL | Logged In Status | Result | info
 --- | --- | --- | --- | ---
-Landing Page | / | Guest | pass | 1 warning
+Landing Page | / | Guest | pass | 
 Products | products/?sort=price&direction=asc | Guest | Pass |
 Training equipment | products/?category=freeweights,kettlebells,spinning,yogamats | Guest | Pass |
 Courses | products/?category=workoutprograms | Guest | Pass |
 Special Offers | products/?category=new_arrivals,clearance | Guest | Pass |
 trainers view all trainers | trainers/alltrainers/ | Guest | Pass |
-trainer details | trainers/trainerdetails/1 | Guest | 
+trainer details | trainers/trainerdetails/1 | Guest | Pass |
+about | about/ | Guest | Pass |
+Product details | products/3/ | Guest | Pass |
+Shopping bag | bag/ | Guest | Pass |
+Checkout | checkout/ | Guest | Pass | 
+
+Landing Page | / | Admin | Pass | 
+Products | products/?sort=price&direction=asc | Admin | Pass |
+Training equipment | products/?category=freeweights,kettlebells,spinning,yogamats | Admin | Pass |
+Courses | products/?category=workoutprograms | Admin | Pass |
+Special Offers | products/?category=new_arrivals,clearance | Admin | Pass |
+trainers view all trainers | trainers/alltrainers/ | Admin | Pass |
+trainer details | trainers/trainerdetails/1 | Admin |  |
+about | about/ | Admin |  |
+Product details | products/3/ | Admin |  |
+Shopping bag | bag/ | Admin |  |
+Checkout | checkout/ | Admin |  | 
 
 ### CSS Validation
 
