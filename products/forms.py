@@ -29,7 +29,9 @@ class ProductForm(forms.ModelForm):
 
         self.fields['category'].choices = friendly_names
         for field_name, field in self.fields.items():
-            field.widget.attrs['class'] = 'border-black rounded-0'
+            print(field_name)
+            if field_name != 'image':
+                field.widget.attrs['class'] = 'border-black rounded-0'
 
 
 class WorkoutProgramForm(forms.ModelForm):
@@ -71,5 +73,4 @@ class WorkoutProgramForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
 
         for field_name, field in self.fields.items():
-            if field != 'image':
-                field.widget.attrs['class'] = 'border-black rounded-0'
+            field.widget.attrs['class'] = 'border-black rounded-0'
