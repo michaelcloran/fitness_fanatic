@@ -26,9 +26,9 @@ Training equipment | products/?category=freeweights,kettlebells,spinning,yogamat
 Courses | products/?category=workoutprograms | Admin | Pass |
 Special Offers | products/?category=new_arrivals,clearance | Admin | Pass |
 trainers view all trainers | trainers/alltrainers/ | Admin | Pass |
-trainer details | trainers/trainerdetails/1 | Admin |  |
-about | about/ | Admin |  |
-Product details | products/3/ | Admin |  |
+trainer details | trainers/trainerdetails/1 | Admin | Pass |
+about | about/ | Admin | Pass |
+Product details | products/3/ | Admin | Pass |
 Shopping bag | bag/ | Admin |  |
 Checkout | checkout/ | Admin |  | 
 
