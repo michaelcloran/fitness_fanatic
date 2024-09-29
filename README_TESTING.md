@@ -4,7 +4,21 @@
 
 ### HTML Validation
 
+HTML Validation was done with the W3 HTML Validator (https://validator.w3.org/nu/)
+
+Page | URL | Logged In Status | Result
+--- | --- | --- | ---
+Landing Page | / | Guest |
+
 ### CSS Validation
+
+    The CSS was validated using the W3 CSS Validator (https://jigsaw.w3.org/css-validator/)
+
+File | Result | issues
+--- | --- | ---
+checkout.css | Pass | 1 Warning
+profile.css |  Pass | 
+base.css | Pass |
 
 ### Python Validation
 
