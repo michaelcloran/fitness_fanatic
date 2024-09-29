@@ -376,7 +376,6 @@ def check_update_needed(lst1, lst2):
     return updateit
 
 
-
 @login_required
 def view_class_attendance(request, wo_program_id):
     """ view class attendances """
@@ -395,50 +394,33 @@ def view_class_attendance(request, wo_program_id):
     wo_program = get_object_or_404(WorkoutProgram, pk=wo_program_id)
 
     if request.method == "POST":
-        print(request.POST)
+        todays_date = datetime.now()
+
+        today_min = (todays_date - timedelta(hours=6))
+        
+        check_for_up = check_update_needed(request.POST.getlist('student'), request.POST.getlist('student.hidden'))
+        for item_id in check_for_up:
+            ClassAttendance.objects.filter(student=item_id,
+                                           workout_program=wo_program,
+                                           date__range=(today_min, todays_date)
+                                           ).delete()
+
         for student_id in request.POST.getlist('student'):
-                     
-            todays_date = timezone.now()
-
-            today_min = (todays_date - timedelta(hours=6))
-
+            
             stud = get_object_or_404(CustomersEnrolledOnCourse, id=student_id)
 
-            check_for_up = check_update_needed(request.POST.getlist('student'), request.POST.getlist('student.hidden'))
-            print(f"Checking for update {check_for_up} student  {student_id}")
-            for item_id in check_for_up:
-                print(f"item_id {item_id}")
-                ClassAttendance.objects.filter(student=item_id,
-                                               workout_program=wo_program,
-                                               date__range=(today_min, todays_date)
-                                               ).delete()
+            class_already_taken = ClassAttendance.objects.filter(student=student_id,
+                                                                 workout_program=wo_program,
+                                                                 date__range=(today_min, todays_date)
+                                                                 )
             
-            class_already_taken = ClassAttendance.objects.all().filter(student=student_id,
-                                                                       workout_program=wo_program,
-                                                                       date__range=(today_min, todays_date)
-                                                                       )
-            if class_already_taken.count() > 0:
-                messages.warning(request,
-                             "You have already taken class attendance "
-                             "for today"
-                             )
-                wo_programs = WorkoutProgram.objects.all()
+            if not class_already_taken:
+                class_attendee = ClassAttendance()
+                class_attendee.workout_program = wo_program
 
-                context = {
-                    'wo_programs': wo_programs,
-                    'is_trainer_bool': trainer_bool,
-                }
-                return render(request, 'trainers/view_trainer_courses.html', context)
+                class_attendee.student = stud
+                class_attendee.save()
 
-            class_attendee = ClassAttendance()
-            class_attendee.workout_program = wo_program
-
-            class_attendee.student = stud
-            class_attendee.save()
-
-        
-
-        
         messages.success(request, "You class attendances have been"
                          " logged thank you!"
                          )
