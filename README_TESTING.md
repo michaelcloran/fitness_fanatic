@@ -149,9 +149,19 @@ As a User I can order a product so that I can get it delivered to me | 30/9/24 |
 As a User I can add a product to the Bag and administer the shopping bag | 30/9/24 | 30/9/24 |
 As a User I can edit my profile so that I can have an up to date profile | 30/9/24 | 30/9/24 |
 As a User I can enroll on a course so that I can partake in a workout program | 30/9/24 | 30/9/24 |
-As a User I can contact site admin for any site issues that I may have |
-As a User I can contact a Trainer for any queries or concerns I may have in relation to workouts |
+As a User I can contact site admin for any site issues that I may have | 30/9/24 | 30/9/24 |
+As a User I can contact a Trainer for any queries or concerns I may have in relation to workouts | 30/9/24 | 30/9/24 |
 
+### EPIC Trainer
+
+I can administer my Trainer account
+
+User Story | deskop | mobile | notes
+--- | --- | --- | ---
+I can edit the trainer profile | 30/9/24 | 30/9/24 |
+I can create, edit and delete (CRUD) a workout program | 30/9/24 | 
+I can view trainer email and mark it as read | 
+I can set class attendance for enrolled students |
 
 
 
