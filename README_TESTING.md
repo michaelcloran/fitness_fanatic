@@ -159,9 +159,19 @@ I can administer my Trainer account
 User Story | deskop | mobile | notes
 --- | --- | --- | ---
 I can edit the trainer profile | 30/9/24 | 30/9/24 |
-I can create, edit and delete (CRUD) a workout program | 30/9/24 | 
-I can view trainer email and mark it as read | 
-I can set class attendance for enrolled students |
+I can create, edit and delete (CRUD) a workout program | 30/9/24 | 30/9/24 |
+I can view trainer email and mark it as read | 30/9/24 | 30/9/24 |
+I can set class attendance for enrolled students | 30/9/24 | 30/9/24 |
+
+### EPIC Admin
+
+I can administer the site and Trainers
+
+User Story | deskop | mobile | notes
+--- | --- | --- | ---
+I can read Site Admin emails through Django Admin | 30/9/24 | 30/9/24 |
+I can create, edit and delete (CRUD) trainers | 30/9/24 | 30/9/24 |
+I can create, edit and delete (CRUD) products | 30/9/24 | 30/9/24 |
 
 
 

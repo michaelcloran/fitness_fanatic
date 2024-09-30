@@ -218,6 +218,10 @@ def delete_trainer(request, trainer_id):
 
 def contact_trainer(request, trainer_id):
     """ A view for the contact trainer """
+    if request.user.is_authenticated:
+        trainer_bool = check_trainer_user_exists(request.user)
+    else:
+        trainer_bool = False
 
     trainer = get_object_or_404(TrainerProfile, id=trainer_id)
 
@@ -246,7 +250,7 @@ def contact_trainer(request, trainer_id):
 
             context = {
                 'trainers': trainers,
-                'is_trainer_bool': check_trainer_user_exists(request.user),
+                'is_trainer_bool': trainer_bool,
             }
 
             return render(request, 'trainers/view_trainers.html', context)
