@@ -135,6 +135,22 @@ my account my profile (desktop) | 91 | 94 | 100 | 100
 my account my profile (mobile) | 77 | 95 | 100 | 100
 
 
+## User Story Testing
+
+### EPIC User
+I can administer my User account and contact the site if need be
+
+User Story | deskop | mobile | notes
+--- | --- | --- | ---
+As a User I can Register with the site so I can Login | 30/924 | 30/9/24 |
+As a User I can Login to the site so I can use and administer my account | 30/924 | 30/9/24 |
+As a User I can view Trainers and their courses and see their Bio's | 30/9/24 | 30/9/24 |
+As a User I can order a product so that I can get it delivered to me | 30/9/24 | 30/9/24 |
+As a User I can add a product to the Bag and administer the shopping bag | 30/9/24 | 30/9/24 |
+As a User I can edit my profile so that I can have an up to date profile | 30/9/24 | 30/9/24 |
+As a User I can enroll on a course so that I can partake in a workout program | 30/9/24 | 30/9/24 |
+As a User I can contact site admin for any site issues that I may have |
+As a User I can contact a Trainer for any queries or concerns I may have in relation to workouts |
 
 
 
