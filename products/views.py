@@ -60,7 +60,9 @@ def all_products(request):
                                )
                 return redirect(reverse('products'))
 
-            queries = Q(name__icontains=query) | Q(description__icontains=query)
+            queries = Q(name__icontains=query) | \
+                Q(description__icontains=query)
+
             products = products.filter(queries)
 
     current_sorting = f'{sort}_{direction}'
@@ -88,8 +90,13 @@ def product_detail(request, product_id):
 
     if product.category.name == "workoutprograms":
 
-        wo_program = WorkoutProgram.objects.filter(product_id=product_id).values()
-        trainer = TrainerProfile.objects.filter(id=wo_program[0]['trainer_id'])
+        wo_program = WorkoutProgram.objects.filter(
+                                                   product_id=product_id
+                                                   ).values()
+
+        trainer = TrainerProfile.objects.filter(
+                                                id=wo_program[0]['trainer_id']
+                                                )
 
         context = {
             'product': product,

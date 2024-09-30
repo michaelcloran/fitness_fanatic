@@ -20,6 +20,7 @@ from datetime import datetime
 from datetime import timedelta
 from django.utils import timezone
 
+
 # Create your views here.
 def check_trainer_user_exists(username):
     if TrainerProfile.objects.filter(user=username).exists():
@@ -306,20 +307,18 @@ def update_trainer_email(request, email_id):
 
     trainer = None
     if request.method == "POST":
-        print("here")
         contact_mail = get_object_or_404(ContactTrainerRequest, pk=email_id)
         trainer = contact_mail.trainer
-        print(request.POST)
+
+        contact_mails = ContactTrainerRequest.objects.filter(trainer=trainer,
+                                                             read=False
+                                                             )
 
         if request.POST.get('contact_email_read') == 'read':
             contact_mail.read = True
             contact_mail.save()
 
             messages.success(request, "The email status was changed to read!!")
-
-            contact_mails = ContactTrainerRequest.objects.filter(trainer=trainer,
-                                                                 read=False
-                                                                 )
 
             context = {
                 'trainer': trainer,
@@ -372,8 +371,17 @@ def view_trainer_courses(request):
 def check_update_needed(lst1, lst2):
     """ checks if student not in list """
     updateit = list(set(lst2) - set(lst1))
-    
+
     return updateit
+
+
+def get_class4_stud(student_id, wo_program, today_min, tdys_date):
+    return ClassAttendance.objects.filter(student=student_id,
+                                          workout_program=wo_program,
+                                          date__range=(today_min,
+                                                       tdys_date
+                                                       )
+                                          )
 
 
 @login_required
@@ -389,7 +397,9 @@ def view_class_attendance(request, wo_program_id):
     else:
         trainer_bool = False
 
-    students = CustomersEnrolledOnCourse.objects.all().filter(wo_program=wo_program_id)
+    studs = CustomersEnrolledOnCourse.objects.filter(
+                                                     wo_program=wo_program_id
+                                                     )
 
     wo_program = get_object_or_404(WorkoutProgram, pk=wo_program_id)
 
@@ -397,8 +407,12 @@ def view_class_attendance(request, wo_program_id):
         todays_date = datetime.now()
 
         today_min = (todays_date - timedelta(hours=6))
-        
-        check_for_up = check_update_needed(request.POST.getlist('student'), request.POST.getlist('student.hidden'))
+
+        stud_lst = request.POST.getlist('student')
+        stud_hidden_lst = request.POST.getlist('student.hidden')
+        check_for_up = check_update_needed(stud_lst,
+                                           stud_hidden_lst
+                                           )
         for item_id in check_for_up:
             ClassAttendance.objects.filter(student=item_id,
                                            workout_program=wo_program,
@@ -406,15 +420,16 @@ def view_class_attendance(request, wo_program_id):
                                            ).delete()
 
         for student_id in request.POST.getlist('student'):
-            
+            tdys_date = datetime.now()
             stud = get_object_or_404(CustomersEnrolledOnCourse, id=student_id)
 
-            class_already_taken = ClassAttendance.objects.filter(student=student_id,
-                                                                 workout_program=wo_program,
-                                                                 date__range=(today_min, todays_date)
-                                                                 )
-            
-            if not class_already_taken:
+            cls_alrdy_tkn = get_class4_stud(student_id,
+                                            wo_program,
+                                            today_min,
+                                            tdys_date
+                                            )
+
+            if not cls_alrdy_tkn:
                 class_attendee = ClassAttendance()
                 class_attendee.workout_program = wo_program
 
@@ -436,14 +451,16 @@ def view_class_attendance(request, wo_program_id):
     todays_date = datetime.now()
 
     today_min = (todays_date - timedelta(hours=6))
-    class_already_taken = ClassAttendance.objects.all().filter(workout_program=wo_program,
-                                                               date__range=(today_min, todays_date)
-                                                               )
+    cls_alrdy_tkn = ClassAttendance.objects.filter(workout_program=wo_program,
+                                                   date__range=(today_min,
+                                                                todays_date
+                                                                )
+                                                   )
     context = {
-        'students': students,
+        'students': studs,
         'wo_program': wo_program,
         'is_trainer_bool': trainer_bool,
-        'class_already_taken': class_already_taken,
+        'class_already_taken': cls_alrdy_tkn,
     }
 
     return render(request, 'trainers/class_attendance.html', context)

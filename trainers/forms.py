@@ -21,7 +21,9 @@ class AddTrainerUserNameForm(forms.ModelForm):
     firstname = forms.CharField(max_length=50, required=True)
     lastname = forms.CharField(max_length=50, required=True)
     email = forms.EmailField(required=True,
-                             widget=forms.TextInput(attrs={'class': 'form-control'}))
+                             widget=forms.TextInput(
+                                attrs={'class': 'form-control'})
+                             )
 
     class Meta:
         model = User
@@ -64,15 +66,13 @@ class AddTrainerUserNameForm(forms.ModelForm):
         }
 
         for field in self.fields:
-            if field != 'password2' and field != 'username' and field != 'password1':
-                if self.fields[field].required:
-                    placeholder = f'{placeholders[field]} *'
-                else:
-                    placeholder = placeholders[field]
-                self.fields[field].widget.attrs['placeholder'] = placeholder
-                str = 'border-black rounded-0 add_trainer-form-input'
-                self.fields[field].widget.attrs['class'] = str
-                
+            if self.fields[field].required:
+                placeholder = f'{placeholders[field]} *'
+            else:
+                placeholder = placeholders[field]
+            self.fields[field].widget.attrs['placeholder'] = placeholder
+            str = 'border-black rounded-0 add_trainer-form-input'
+            self.fields[field].widget.attrs['class'] = str
 
 
 class TrainerProfileForm(forms.ModelForm):
@@ -105,7 +105,6 @@ class TrainerProfileForm(forms.ModelForm):
                 self.fields[field].widget.attrs['placeholder'] = placeholder
                 str = 'border-black rounded-0 add_trainer-form-input'
                 self.fields[field].widget.attrs['class'] = str
-            
 
 
 class ViewTrainerUserNameForm(forms.ModelForm):
@@ -114,7 +113,11 @@ class ViewTrainerUserNameForm(forms.ModelForm):
     first_name = forms.CharField(max_length=50, required=True)
     last_name = forms.CharField(max_length=50, required=True)
     email = forms.EmailField(required=True,
-                             widget=forms.TextInput(attrs={'class': 'form-control'}))
+                             widget=forms.TextInput(
+                                attrs={
+                                       'class': 'form-control'
+                                       })
+                             )
 
     class Meta:
         model = User
@@ -179,4 +182,3 @@ class ContactTrainerRequestForm(forms.ModelForm):
             self.fields[field].widget.attrs['placeholder'] = placeholder
             str = 'border-black rounded-0 add_trainer-form-input'
             self.fields[field].widget.attrs['class'] = str
-           

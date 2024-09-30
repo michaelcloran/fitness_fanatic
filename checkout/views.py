@@ -63,23 +63,23 @@ def checkout(request):
                 try:
                     product = Product.objects.get(id=item_id)
                     if isinstance(item_data, int):
-                        order_line_item = OrderLineItem(
+                        order_ln_item = OrderLineItem(
                             order=order,
                             product=product,
                             quantity=item_data,
                         )
-                        order_line_item.save()
+                        order_ln_item.save()
 
                         if str(product.category) == 'workoutprograms':
                             wo_program = get_object_or_404(WorkoutProgram,
                                                            product=product.id
                                                            )
-                            
-                            customer_enroll_on_course = CustomersEnrolledOnCourse()
-                            customer_enroll_on_course.order_line_item = order_line_item
-                            customer_enroll_on_course.wo_program = wo_program
 
-                            customer_enroll_on_course.save()
+                            cust_enroll_course = CustomersEnrolledOnCourse()
+                            cust_enroll_course.order_line_item = order_ln_item
+                            cust_enroll_course.wo_program = wo_program
+
+                            cust_enroll_course.save()
                     else:
                         temp = item_data['items_by_size'].items()
                         for size, quantity in temp:

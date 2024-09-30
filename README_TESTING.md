@@ -19,24 +19,23 @@ about | about/ | Guest | Pass |
 Product details | products/3/ | Guest | Pass |
 Shopping bag | bag/ | Guest | Pass |
 Checkout | checkout/ | Guest | Pass | 
-
 Landing Page | / | Admin | Pass | 
 Products | products/?sort=price&direction=asc | Admin | Pass |
 Training equipment | products/?category=freeweights,kettlebells,spinning,yogamats | Admin | Pass |
 Courses | products/?category=workoutprograms | Admin | Pass |
 Special Offers | products/?category=new_arrivals,clearance | Admin | Pass |
-
 trainer details | trainers/trainerdetails/1 | Admin | Pass |
 about | about/ | Admin | Pass |
 Product details | products/3/ | Admin | Pass |
 Shopping bag | bag/ | Admin | Pass |
 Checkout | checkout/ | Admin | Pass | 
-
 trainers add trainer | trainers/ | Admin | Pass |
 trainers view all trainers | trainers/alltrainers/ | Admin | Pass |
-trainers add workout program | products/add/ | Admin |
-
-
+trainers add workout program | products/add/ | Admin | Pass |
+trainer view workout programs | trainers/trainercourses/ | Admin | Pass |
+trainer class attendance | trainers/classAttendance/1/ | Admin | Pass |
+My Account Product Management | products/add/ | Admin | Pass
+My Account My Profile | profile/ | Admin | Pass |
 
 ### CSS Validation
 
@@ -50,7 +49,48 @@ base.css | Pass |
 
 ### Python Validation
 
+The following files were tested with the CI Python Linter(https://pep8ci.herokuapp.com/)
+
+App | File | Result
+--- | --- | ---
+about | admin.py | Pass
+about | apps.py | Pass
+about | forms.py | Pass
+about | views.py | Pass
+bag | apps.py | Pass
+bag | contexts.py | Pass
+bag | views.py | Pass
+checkout | admin.py | Pass
+checkout | apps.py | Pass
+checkout | forms.py | Pass
+checkout | signals.py | Pass
+checkout | views.py | Pass
+checkout | webhook_handler.py | Pass
+checkout | webhooks.py | Pass
+home | apps.py | Pass
+home | views.py | Pass
+products | admin.py | Pass
+products | apps.py | Pass
+products | forms.py | Pass
+products | views.py | Pass
+products | widgets.py | Pass
+profiles | apps.py | Pass
+profiles | forms.py | Pass
+profiles | views.py | Pass
+trainers | admin.py | Pass
+trainers | apps.py | Pass
+trainers | forms.py | Pass
+trainers | views.py | Pass
+trainers | widgets.py | Pass
+trainers | checkif_student_already_checked.py | Pass
+
 ### JavaScript Validation
+JavaScript linting was done with JSHint (https://jshint.com/)
+
+App | File | Result
+--- | --- | ---
+checkout | stripe_elements.js | Pass
+profiles | countryfield.js | Pass
 
 ## Wave Web AIM
 

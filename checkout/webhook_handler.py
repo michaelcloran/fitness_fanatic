@@ -146,11 +146,11 @@ class StripeWH_Handler:
                             wo_program = get_object_or_404(WorkoutProgram,
                                                            product=product.id
                                                            )
-                            customer_enroll_on_course = CustomersEnrolledOnCourse(
+                            cust_enroll_course = CustomersEnrolledOnCourse(
                                 order_line_item=order_line_item,
                                 wo_program=wo_program,
                             )
-                            customer_enroll_on_course.save()
+                            cust_enroll_course.save()
                     else:
                         temp = item_data['items_by_size'].items()
                         for size, quantity in temp:
@@ -173,7 +173,7 @@ class StripeWH_Handler:
                     'Created order in webhook',
             status=200)
 
-    def handle_payment_intent_payment_failed(self, event):
+    def hnd_pay_intent_payment_failed(self, event):
         """
         Handle the payment_intent.payment_failed webhook from Stripe
         """

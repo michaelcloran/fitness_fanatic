@@ -11,7 +11,9 @@ class UpdateUserForm(forms.ModelForm):
     first_name = forms.CharField(max_length=50, required=True)
     last_name = forms.CharField(max_length=50, required=True)
     email = forms.EmailField(required=True,
-                             widget=forms.TextInput(attrs={'class': 'form-control'}))
+                             widget=forms.TextInput(
+                                attrs={'class': 'form-control'})
+                             )
 
     class Meta:
         model = User
@@ -48,5 +50,5 @@ class UserProfileForm(forms.ModelForm):
                 else:
                     placeholder = placeholders[field]
                 self.fields[field].widget.attrs['placeholder'] = placeholder
-            self.fields[field].widget.attrs['class'] = 'border-black rounded-0 profile-form-input'
-            
+            str = 'border-black rounded-0 profile-form-input'
+            self.fields[field].widget.attrs['class'] = str
