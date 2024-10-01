@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /accounts/
+Disallow: /bag/
+Sitemap: https://fitness-fanatic-8422c1e8a4c9.herokuapp.com/sitemap.xml
