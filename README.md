@@ -62,7 +62,7 @@ Fitness Fanatic is a local training center offering the purchase of various smal
 
 The offering for workout programs vary from the Body Beast program to the RKS Kettlebell System to the Skogg Kettlebell system to Spinning to Scientific Stretching. These are small offerings but are varied and interesting courses which would typically go on for an hour.
 
-Marketing is done on customer satisfaction where they would use word of mouth to spread the word about a cool training program. At Fitness Fanatic a Facebook webpage was also setup to spread the word about the training programs on offer ![Facebook Page]()
+Marketing is done on customer satisfaction where they would use word of mouth to spread the word about a cool training program. At Fitness Fanatic a Facebook webpage was also setup to spread the word about the training programs on offer [Facebook Page](/readme_images/facebook_fitness_fanatic_screengrab.png)
 
 ## Planning 
 
