@@ -37,6 +37,19 @@ trainer class attendance | trainers/classAttendance/1/ | Admin | Pass |
 My Account Product Management | products/add/ | Admin | Pass
 My Account My Profile | profile/ | Admin | Pass |
 
+On 1/10/24 I added mailchimp embedded form and get the following HTML Validation error
+CSS: false: Parse Error. und:#fff; false;clear
+```
+#mc_embed_signup{
+    background:#fff; 
+    false;
+    clear:left; 
+    font:14px Helvetica,Arial,sans-serif; 
+    width: 600px;
+}
+```
+To fix the bug I just removed the false; statement
+
 ### CSS Validation
 
     The CSS was validated using the W3 CSS Validator (https://jigsaw.w3.org/css-validator/)

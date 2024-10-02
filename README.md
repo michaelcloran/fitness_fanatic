@@ -6,7 +6,7 @@
 
 ## Fitness Fanatic
 
-Fitness Fanatic is a fictional website designed specifically for Code Institute for Project number 5 which is an e-commerce website. This site is all about training where you can buy fitness programs which go on for several weeks at several days a week. Or you can purchase basic fitness equipment for home use. The fictional workout programs are given in a fictional training location in person at say Fitness Fanatic Bridgewater Arklow. I chose the location Arklow as its where I live and for this type of business there is a lot of local competition in the local area.
+Fitness Fanatic is a fictional website designed specifically for Code Institute for Project number 5 which is an e-commerce website. [link](https://fitness-fanatic-8422c1e8a4c9.herokuapp.com/) This site is all about training where you can buy fitness programs which go on for several weeks at several days a week. Or you can purchase basic fitness equipment for home use. The fictional workout programs are given in a fictional training location in person at say Fitness Fanatic Bridgewater Arklow. I chose the location Arklow as its where I live and for this type of business there is a lot of local competition in the local area.
 
 On the site you can purchase equipment.
 
