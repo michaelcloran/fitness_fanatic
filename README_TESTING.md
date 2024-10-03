@@ -122,30 +122,45 @@ my profile | 0 | skipped heading level | pass
 add trainer | 0 | skipped heading level | pass
 view trainer details | 0 | skipped heading level | pass
 
+On 1/10/24 I added the footer and get contrast errors showing up but if i click on the contrast option it shows
+Contrast Ratio: 8.59:1
+
+Text Size: Normal
+
+Sample
+
+WCAG AA: Pass
+WCAG AAA: Pass
+On 1/10/24 I added mailchimp embedded form and get a missing form label on the embedded form. I have added a label but it does not fix the bug.
+
 ## Lighthouse testing
 
 It was noticed that for lighthouse testing that it was best to use incognito mode on Google Chrome. It was also noticed that i get different values if I have my VPN active or if I connect outside my dedicated firewall.
 
 Page | Performance | Accessibility | Best Practice | SEO
 --- | --- | --- | --- | ---
-Home (landing page desktop) | 96 | 93 | 100 | 100
-Home (mobile) | 87 | 92 | 100 | 100
-all products listing by price (desktop) | 91 | 94 | 100 | 91
-all products listing (mobile) | 72 | 95 | 100 | 91
-all training equipment (desktop) | 92 | 94 | 100 | 91
-all training equipment (mobile) | 73 | 95 | 100 | 91
-courses | | | | todo
-all specials (desktop) | 92 | 94 | 100 | 91
-all specials (mobile) | 69 | 95 | 100 | 91
-trainers view all trainers | | | | todo
-trainers add workout program | | | | todo
-trainers view workout programs | | | | todo
-about (desktop) | 95 | 93 | 100 | 100
-about (mobile) | 82 | 95 | 100 | 100
-my account project management (desktop) | 90 | 94 | 100 | 100
-my account project management (mobile) | 82 | 93 | 100 | 100
-my account my profile (desktop) | 91 | 94 | 100 | 100
-my account my profile (mobile) | 77 | 95 | 100 | 100
+Home (landing page desktop) | 97 | 90 | 100 | 100
+Home (mobile) | 73 | 94 | 100 | 100
+all products listing by price (desktop) | 76 | 91 | 100 | 91
+all products listing (mobile) | 66 | 96 | 100 | 91
+all training equipment (desktop) | 88 | 91 | 100 | 91
+all training equipment (mobile) | 71 | 96 | 100 | 91
+courses (desktop)| 87 | 95 | 100 | 91
+courses (mobile) | 72 | 96 | 96 | 91
+all specials (desktop) | 91 | 91 | 100 | 91
+all specials (mobile) | 73 | 96 | 100 | 91
+trainers view all trainers (desktop) | 87 | 90 | 100 | 91
+trainers view all trainers (mobile) | 75 | 96 | 96 | 91
+trainers add workout program (desktop) | 87 | 91 | 100 | 100
+trainers add workout program (mobile) | 73 | 95 | 100 | 100
+trainers view workout programs (desktop) | 84 | 90 | 100 | 91
+trainers view workout programs (mobile) | 72 | 96 | 100 | 91
+about (desktop) | 92 | 94 | 100 | 100
+about (mobile) | 70 | 96 | 100 | 100
+my account project management (desktop) | 88 | 91 | 100 | 100
+my account project management (mobile) | 73 | 95 | 100 | 100
+my account my profile (desktop) | 88 | 91 | 100 | 100
+my account my profile (mobile) | 70 | 96 | 100 | 100
 
 
 ## User Story Testing

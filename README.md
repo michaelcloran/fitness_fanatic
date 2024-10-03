@@ -188,6 +188,31 @@ Marketing is done on customer satisfaction where they would use word of mouth to
 
 ## UX Colour Palette
 
+Colours used 
+
+Value |
+--- |
+white |
+#e6ebf1 |
+#cfd7df |
+#fefde5 |
+#aab7c4 |
+#000 |
+rgba(23, 162, 184, .85) |
+#3B4754 |
+#222 |
+#fff |
+#007bff |
+#6c757d |
+#28a745 |
+#dc3545 |
+#ffc107 |
+#17a2b8 |
+#f8f9fa |
+#343a40 |
+
+
+
 ## Images
 
 The images used for the site were researched and got from various sources. The planning and credits in raw format can be found [here](README_IMAGES.md)
@@ -196,10 +221,12 @@ The images used for the site were researched and got from various sources. The p
   For this site I kept things simple and strongly followed the walkthrough.
 
 ### Header
-
+ 
+![Header Screengrab](/readme_images/header.png)
 
 ### Footer
- Todo
+
+![Footer Screengrab](/readme_images/footer.png)
 
 ### Homepage
 
