@@ -23,7 +23,7 @@
         <div class="row">
             <div class="trainer-courses-container col-10 offset-1">
                 
-                <div class="row">
+                <div class="col">
                     {% if request.user.is_authenticated and is_trainer_bool or request.user.is_superuser %}
                     {% for wo_program in wo_programs %}
                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
@@ -39,6 +39,8 @@
                 </div>
             </div>
         </div>
+        <br>
+        <br>
     </div>
     <div class="btt-button shadow-sm rounded-0 border border-black">
         <a class="btt-link d-flex h-100">
