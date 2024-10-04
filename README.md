@@ -1,6 +1,71 @@
 ![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
 
 # Welcome
+- [Welcome](#welcome)
+- [Project Research and Preparation](#project-research-and-preparation)
+  * [Fitness Fanatic](#fitness-fanatic)
+    + [Landing page on desktop](#landing-page-on-desktop)
+    + [Landing page on mobile](#landing-page-on-mobile)
+    + [Categories](#categories)
+  * [Site Testing](#site-testing)
+  * [E-Commerce Business Model](#e-commerce-business-model)
+  * [Marketing Strategies](#marketing-strategies)
+  * [Planning](#planning)
+  * [Entity Relationship Diagram](#entity-relationship-diagram)
+  * [Wireframes](#wireframes)
+    + [About](#about)
+    + [Bag](#bag)
+    + [Checkout](#checkout)
+    + [Contact Trainers](#contact-trainers)
+    + [Home Page/ Landing Page](#home-page--landing-page)
+    + [Product new arrivals](#product-new-arrivals)
+    + [Product workout programs](#product-workout-programs)
+    + [Products](#products)
+    + [Trainer Class Admin](#trainer-class-admin)
+    + [Trainer Profile](#trainer-profile)
+    + [Trainers Add Workout Program](#trainers-add-workout-program)
+    + [Trainers](#trainers)
+    + [User Profile](#user-profile)
+    + [Admin Add Trainer](#admin-add-trainer)
+  * [EPICS](#epics)
+    + [Admin](#admin)
+    + [Trainer](#trainer)
+    + [User](#user)
+  * [User Stories](#user-stories)
+    + [Admin](#admin-1)
+    + [Trainer](#trainer-1)
+    + [User](#user-1)
+  * [UX Colour Palette](#ux-colour-palette)
+  * [Images](#images)
+  * [Website Design](#website-design)
+    + [Header](#header)
+    + [Footer](#footer)
+    + [Homepage](#homepage)
+      - [Products](#products-1)
+      - [Add Product](#add-product)
+    + [Courses](#courses)
+    + [Trainers](#trainers-1)
+      - [Admin Add Trainer](#admin-add-trainer-1)
+      - [View All Trainers](#view-all-trainers)
+        * [View Trainer Detail](#view-trainer-detail)
+        * [View Trainer Email](#view-trainer-email)
+      - [Add Workout Program](#add-workout-program)
+      - [View Workout Programs](#view-workout-programs)
+        * [Class Attendance](#class-attendance)
+    + [About](#about-1)
+    + [Profile](#profile)
+    + [Bag](#bag-1)
+  * [Future Features](#future-features)
+  * [Technologies Used](#technologies-used)
+  * [Deployment](#deployment)
+    + [Clone GitHub Repository](#clone-github-repository)
+    + [Deployment on Heroku](#deployment-on-heroku)
+    + [Amazon AWS S3](#amazon-aws-s3)
+    + [IAM](#iam)
+    + [Final Setup](#final-setup)
+  * [Credits](#credits)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 # Project Research and Preparation
 
@@ -30,6 +95,8 @@ On the site a trainer can administer their classes via an attendance form where 
 
 If time permits I will have typical training workout programmes like the Skogg kettlebell system, RKS kettlebell system, for weight training the Body Beast workout program, Suspension training program, Scientific stretching program. These programs will be broken down into what is covered over the duration of the course. This information will be a template link on the trainers profile template page. Where if a user is interested in a program they can read about it here.
 
+[Goto Top](#welcome)
+
 ### Landing page on desktop 
 
 ![Home Landing Page of site](/readme_images/home_landing_page.png)
@@ -48,9 +115,13 @@ If time permits I will have typical training workout programmes like the Skogg k
 6. name: new_arrivals, friendly_name: New Arrivals
 7. name: workoutprograms, friendly_name: Workout Programs
 
+[Goto Top](#welcome)
+
 ## Site Testing
 
 A sererate README_TESTING.md file was used for testing and can be found [testing readme here](README_TESTING.md) . In this file I explain testing workflows.
+
+[Goto Top](#welcome)
 
 ## E-Commerce Business Model
 
@@ -64,11 +135,15 @@ The offering for workout programs vary from the Body Beast program to the RKS Ke
 
 Marketing is done on customer satisfaction where they would use word of mouth to spread the word about a cool training program. At Fitness Fanatic a Facebook webpage was also setup to spread the word about the training programs on offer [Facebook Page](/readme_images/facebook_fitness_fanatic_screengrab.png)
 
+[Goto Top](#welcome)
+
 ## Planning 
 
 ## Entity Relationship Diagram
 
 ![Fitness Fanatic ERD](/readme_images/fitness_fanatic_erd.png)
+
+[Goto Top](#welcome)
 
 ## Wireframes
 
@@ -76,57 +151,85 @@ Marketing is done on customer satisfaction where they would use word of mouth to
 
 ![About](/readme_images/about.png)
 
+[Goto Top](#welcome)
+
 ### Bag
 
 ![bag](/readme_images/bag.png)
+
+[Goto Top](#welcome)
 
 ### Checkout
 
 ![Checkout](/readme_images/checkout.png)
 
+[Goto Top](#welcome)
+
 ### Contact Trainers
 
 ![Contact Trainers](/readme_images/contact_trainers.png)
+
+[Goto Top](#welcome)
 
 ### Home Page/ Landing Page
 
 ![Home Page](/readme_images/home_page.png)
 
+[Goto Top](#welcome)
+
 ### Product new arrivals
 
 ![Product new arrivals](/readme_images/products_category_new_arrivals.png)
+
+[Goto Top](#welcome)
 
 ### Product workout programs
 
 ![Product workout programs](/readme_images/Products_category_workoutprograms.png)
 
+[Goto Top](#welcome)
+
 ### Products
 
 ![Products](/readme_images/products.png)
+
+[Goto Top](#welcome)
 
 ### Trainer Class Admin
 
 ![Trainer Class Admin](/readme_images/trainer_class_admin.png)
 
+[Goto Top](#welcome)
+
 ### Trainer Profile
 
 ![Trainer Profile](/readme_images/trainer_profile.png)
+
+[Goto Top](#welcome)
 
 ### Trainers Add Workout Program
 
 ![Trainers Add Workout Program](/readme_images/trainers_add_workout_program.png)
 
+[Goto Top](#welcome)
+
 ### Trainers
 
 ![Trainers](/readme_images/trainers.png)
+
+[Goto Top](#welcome)
 
 ### User Profile
 
 ![User Profile](/readme_images/user_profile.png)
 
+[Goto Top](#welcome)
+
 ### Admin Add Trainer
 
 ![Admin Add Trainer](/readme_images/add_trainer.png)
+
+[Goto Top](#welcome)
 
 ## EPICS
 
@@ -158,6 +261,8 @@ Marketing is done on customer satisfaction where they would use word of mouth to
   - As a User I can contact site admin for any site issues that I may have
   - As a User I can contact a Trainer for any queries or concerns I may have in relation to workouts
 
+[Goto Top](#welcome)
+
 ## User Stories
 
 ### Admin
@@ -185,6 +290,7 @@ Marketing is done on customer satisfaction where they would use word of mouth to
 - As a User I can contact site admin for any site issues that I may have <User email Site Admin>
 - As a User I can contact a Trainer for any queries or concerns I may have in relation to workouts <User email Trainer>
 
+[Goto Top](#welcome)
 
 ## UX Colour Palette
 
@@ -211,11 +317,13 @@ rgba(23, 162, 184, .85) |
 #f8f9fa |
 #343a40 |
 
-
+[Goto Top](#welcome)
 
 ## Images
 
 The images used for the site were researched and got from various sources. The planning and credits in raw format can be found [here](README_IMAGES.md)
+
+[Goto Top](#welcome)
 
 ## Website Design
   For this site I kept things simple and strongly followed the walkthrough.
@@ -224,20 +332,29 @@ The images used for the site were researched and got from various sources. The p
  
 ![Header Screengrab](/readme_images/header.png)
 
+[Goto Top](#welcome)
+
 ### Footer
 
 ![Footer Screengrab](/readme_images/footer.png)
+
+[Goto Top](#welcome)
 
 ### Homepage
 
   ![Home page desktop](/readme_images/home_landing_page.png)
 
   ![Home page mobile](/readme_images/home_landing_page_mobile.png)
+
+[Goto Top](#welcome)
+
 #### Products
 
   ![Products listing desktop](/readme_images/products_listing_desktop.png)
 
   ![Products listing mobile](/readme_images/products_listing_mobile.png)
+
+[Goto Top](#welcome)
 
 #### Add Product
   For the add product the logged in user has to be a site admin user or a registered trainer. Products can be of two types training equipment for sale or workout programs. I will deal with workout programs below under trainers as that case is more complex!.
@@ -245,6 +362,8 @@ The images used for the site were researched and got from various sources. The p
   ![Add Product desktop](/readme_images/add_product_desktop.png)
 
   ![Add Product mobile](/readme_images/add_product_mobile.png)
+
+[Goto Top](#welcome)
 
 ### Courses
   Courses or workout programs are given by registered trainers. 
@@ -257,6 +376,8 @@ The images used for the site were researched and got from various sources. The p
 
   ![Add Trainer mobile](/readme_images/add_trainer_mobile.png)
 
+[Goto Top](#welcome)
+
 #### View All Trainers
   Once a trainer is registered their profile is put immediately on the view all trainers page.
 
@@ -264,14 +385,25 @@ The images used for the site were researched and got from various sources. The p
 
   ![View all trainers mobile](/readme_images/view_trainers_mobile.png)
 
+[Goto Top](#welcome)
+
 ##### View Trainer Detail
-  Todo
+  The View trainer detail page is to show the trainer details and allow a customer to contact that trainer via an email. Also on this page its possible for a logged in trainer to view their email.
+
+  ![view Trainer detail desktop](/readme_images/view_trainer_detail.png)
+
+  ![View trainer detail mobile](/readme_images/view_trainer_detail_mobile.png)
+
+[Goto Top](#welcome)
+
 ##### View Trainer Email
   This is a simple form to read open email tickets where if you check the checkbox and click on Update Email Status, the email is no longer visible to the trainer as the ticket is dealt with but can be viewed in admin by admin in the Django Admin App.
 
   ![View Trainer Email desktop](/readme_images/view_trainer_email_desktop.png)
 
   ![View Trainer Email mobile](/readme_images/view_trainer_email_mobile.png)
+
+[Goto Top](#welcome)
 
 #### Add Workout Program
   A Workout program is like a normal product but has extra information fo instance trainer name class size, start date, end date and number of weeks
@@ -280,16 +412,22 @@ The images used for the site were researched and got from various sources. The p
 
   ![Add workout mobile](/readme_images/add_workout_mobile.png)
 
+[Goto Top](#welcome)
+
 #### View Workout Programs
   This navbar link is used to list workout programs where once clicked upon will bring up the class attendance form
 
   ![View Workout Programs](/readme_images/view_workout_programs.png)
+
+[Goto Top](#welcome)
 
 ##### Class Attendance
     
   The class attendance is used to log attendance to a class
 
   ![The Class Attendance Form](/readme_images/class_attendance.png)
+
+[Goto Top](#welcome)
 
 ### About
 
@@ -299,6 +437,8 @@ The images used for the site were researched and got from various sources. The p
 
   ![About mobile](/readme_images/about_mobile.png)
 
+[Goto Top](#welcome)
+
 ### Profile
   The profile is used to store user information used by the system for ease of purchasing of products. On this page it also shows an order history.
 
@@ -306,12 +446,25 @@ The images used for the site were researched and got from various sources. The p
 
   ![My profile mobile](/readme_images/my_profile_mobile.png)
 
+[Goto Top](#welcome)
+
 ### Bag
   ![Shopping bag desktop](/readme_images/shopping_bag_desktop.png)
 
   ![Shopping bag mobile](/readme_images/shopping_bag_mobile.png)
 
+[Goto Top](#welcome)
+
 ## Future Features
+
+- 1. To have a stock management system. For the site as is the actual weights and gym equipment are to be supplied from the York Fitness warehouse and the workout programs are to be at 15 per class where for the initial startup the numbers of enrolled students would determine the number of classes of the same program. A stock management system would stop the numbers of enrolled students going too high and thus the center not being able to provide a reliable service.
+- 2. Statistics. At the moment a trainer can log class attendance, but cant view stats on it. For instance a graphical chart showing attendance numbers on days or week numbers migh be useful.
+- 3. If a customer chooses to purchase several workout programs. On the class attendance sheet it should show that the customer can have guests and you should be able to add a name to them on the attendance sheet.
+- 4. Customer fitness sheets showing date and time class and maybe weight used. If applicable number of reps at weight (for weight trainer this is important)
+- 5. Delete account. To allow a customer to delete their account. 
+- 6. For this test database and system a change password capability isnt really needed but for a live system a change password would be needed. This is simple todo as allauth has the functionality in place. All that is required is on the navlink under profile you would just add a link to the change password allauth form and let allauth do the rest.
+
+[Goto Top](#welcome)
 
 ## Technologies Used
   - HTML
@@ -328,18 +481,12 @@ The images used for the site were researched and got from various sources. The p
   - Bootstrap 4 used for frontend framework
   - favicon.io used to make favicon for the site
 
-## Search Engine Optimization (SEO)
-
-### Keywords
-
-### Metadata
-
-### Sitemap
-
-### Robots
+[Goto Top](#welcome)
 
 ## Deployment
   This project was developed using GitPod. The web application is deployed on Heroku. All Static and media files are stored via Amazon AWS S3. The repository is hosted on GitHub.
+
+[Goto Top](#welcome)
 
 ### Clone GitHub Repository
 
@@ -392,6 +539,8 @@ python3 manage.py loaddata products
 Then I created a superuser by entering
 python3 manage.py createsupreruser
 
+[Goto Top](#welcome)
+
 ### Deployment on Heroku
 
 This project uses Heroku for production and static and media files are stored via a bucket on Amazon AWS S3. To deploy on Heroku
@@ -422,6 +571,8 @@ USE_AWS | True
   I have setup the debug to be true if the DEVELOPMENT is found in the environment variables which will be true for localhost.
 
   - 6. on Heroku under deply for your app click Deploy Branch to deploy your app
+
+[Goto Top](#welcome)
 
 ### Amazon AWS S3
 
@@ -533,6 +684,7 @@ From the AWS Management Console.
   - copy over existing media files to this folder
   - Under Manage Public Permisssions select Grant public read access to this object
 
+[Goto Top](#welcome)
 
 ## Credits
 

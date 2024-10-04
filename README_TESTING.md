@@ -131,6 +131,8 @@ Sample
 
 WCAG AA: Pass
 WCAG AAA: Pass
+
+I am also getting a contrast error on the mailchimp asterisk which is fine.
 On 1/10/24 I added mailchimp embedded form and get a missing form label on the embedded form. I have added a label but it does not fix the bug.
 
 ## Lighthouse testing
