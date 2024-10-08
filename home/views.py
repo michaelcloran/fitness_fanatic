@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from trainers.models import TrainerProfile
 
+
 # Create your views here.
 def check_trainer_user_exists(username):
     if TrainerProfile.objects.filter(user=username).exists():

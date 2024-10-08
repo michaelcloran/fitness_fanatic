@@ -203,5 +203,8 @@ I can read Site Admin emails through Django Admin | 30/9/24 | 30/9/24 |
 I can create, edit and delete (CRUD) trainers | 30/9/24 | 30/9/24 |
 I can create, edit and delete (CRUD) products | 30/9/24 | 30/9/24 |
 
+## Open Bugs
+
+When a Customer registers on the system and validates their account through an email and does an order their first name and last name and email address used in the checkout form are not saved to the my profile form. The reason for this is that the user first name and last name and email are allauth related and need to be saved to the allauth user. The work around here is to open my profile and set the username and email( email should be set to email address you signed up with) and up date the form then from there on in the details should be automatically set for an order.
 
 
