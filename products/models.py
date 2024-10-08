@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 from trainers.models import TrainerProfile
 
 
-# Create your models here.
 class Category(models.Model):
 
     class Meta:
@@ -45,6 +44,3 @@ class WorkoutProgram(models.Model):
 
     def __str__(self):
         return f"{self.trainer.user.first_name} {self.trainer.user.last_name}"
-
-
-

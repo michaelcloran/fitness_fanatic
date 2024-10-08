@@ -10,7 +10,6 @@ from products.models import Product, WorkoutProgram
 from profiles.models import UserProfile
 
 
-# Create your models here.
 class Order(models.Model):
     order_number = models.CharField(max_length=32, null=False, editable=False)
     user_profile = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, null=True, blank=True, related_name='orders')
@@ -82,7 +81,7 @@ class OrderLineItem(models.Model):
 
 
 class CustomersEnrolledOnCourse(models.Model):
-    order_line_item = models.ForeignKey(OrderLineItem, null=False, blank=False, on_delete=models.CASCADE )
+    order_line_item = models.ForeignKey(OrderLineItem, null=False, blank=False, on_delete=models.CASCADE)
     wo_program = models.ForeignKey(WorkoutProgram, null=False, blank=False, on_delete=models.CASCADE)
     date = models.DateField(null=False, blank=False, auto_now=True)
 

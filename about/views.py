@@ -10,11 +10,7 @@ def about_site(request):
     Renders the most recent information on the website author
     and allows the collaboration requests
     Displays an individual instance of :model:`about.About`.
-    **Context**
-    ``about``
-        The most recent instance of :model:`about.About`.
-    ``collaborate_form``
-        an instance of :form:`about.CollaborateForm`.
+   
     **Template**
     :template:`about/about.html`
     """
@@ -24,9 +20,10 @@ def about_site(request):
         if contact_form.is_valid():
             contact_form.save()
             messages.success(request,
-                'Contact request received! I endeavor to respond '
-                'within 2 working days.'
-            )
+                             'Contact request received!'
+                             ' I endeavor to respond '
+                             'within 2 working days.'
+                             )
 
     about = About.objects.all()
     contact_form = ContactRequestForm()
