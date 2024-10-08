@@ -289,6 +289,12 @@ input[name='q']::placeholder {
     width: 600px;
 }
 
+/* --------------------------------- footer */
+.panel-footer{
+    padding-top: 10px;
+    background-color: #000;
+}
+
 /* -------------------------------- Media Queries */
 
 /* Slightly larger container on xl screens */
