@@ -292,7 +292,7 @@ input[name='q']::placeholder {
 /* --------------------------------- footer */
 .panel-footer{
     padding-top: 10px;
-    background-color: #000;
+    background-color: #000 !important;
 }
 
 /* -------------------------------- Media Queries */
