@@ -58,9 +58,11 @@
                 {% endif %}
                 <a href="{% url 'view_trainers' %}" class="dropdown-item">View All Trainers</a>
 
+                {% if request.user.is_superuser or is_trainer_bool %}
                 <a href="{% url 'add_product' %}" class="dropdown-item">Add Workout Program</a>
 
                 <a href="{% url 'view_trainer_courses' %}" class="dropdown-item">View Workout Programs</a>
+                {% endif %}
                 
             </div>
         </li>
