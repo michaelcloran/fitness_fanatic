@@ -38,9 +38,9 @@
                                     <script type="text/javascript">
                                     result = '{{ student | check_already_checked:class_already_taken }}';
                                     if (result === 'True'){
-                                        document.getElementById("checkbox-output").innerHTML = document.getElementById("checkbox-output").innerHTML+ '<input type="checkbox"  name="student" aria-label="Student" value="{{student.id}}" checked><input type="hidden" value="{{student.id}}" name="student.hidden"><label for="student">Attended {{student.order_line_item.order.full_name}}</label><br>';
+                                        document.getElementById("checkbox-output").innerHTML = document.getElementById("checkbox-output").innerHTML+ '<label><input type="checkbox"  name="student" aria-label="Student" value="{{student.id}}" checked><input type="hidden" value="{{student.id}}" name="student.hidden">Attended {{student.order_line_item.order.full_name}}</label><br>';
                                     }else{
-                                        document.getElementById("checkbox-output").innerHTML = document.getElementById("checkbox-output").innerHTML + ('<input type="checkbox"  name="student" aria-label="Student" value="{{student.id}}"><label for="student">Attended {{student.order_line_item.order.full_name}}</label><br>');
+                                        document.getElementById("checkbox-output").innerHTML = document.getElementById("checkbox-output").innerHTML + ('<label><input type="checkbox"  name="student" aria-label="Student" value="{{student.id}}">Attended {{student.order_line_item.order.full_name}}</label><br>');
                                     }
                                     </script>
                             </div>

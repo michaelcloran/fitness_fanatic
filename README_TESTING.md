@@ -117,7 +117,7 @@ view all trainers | 0 | skipped heading level | pass
 trainer logged in add workout program | 0 | skipped heading level | pass
 trainer logged in view workout programs | 0 | skipped heading level | pass
 about page | 0 | skipped heading level | pass
-class attendance | 0 | orphaned form label, missing fieldset, skipped heading level | pass
+class attendance | 0 | missing fieldset, skipped heading level | pass
 my profile | 0 | skipped heading level | pass
 add trainer | 0 | skipped heading level | pass
 view trainer details | 0 | skipped heading level | pass
