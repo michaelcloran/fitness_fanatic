@@ -207,5 +207,5 @@ I can create, edit and delete (CRUD) products | 30/9/24 | 30/9/24 |
 
 - 1. When a Customer registers on the system and validates their account through an email and does an order their first name and last name and email address used in the checkout form are not saved to the my profile form. The reason for this is that the user first name and last name and email are allauth related and need to be saved to the allauth user. The work around here is to open my profile and set the username and email( email should be set to email address you signed up with) and up date the form then from there on in the details should be automatically set for an order.
 
-- 2. When you purchase an order when the customer is already enrolled on a course and the trainer goes into class attendance, then in there there is 2 users with the same name and when you click on one as attended both are set to attend. This might not be seen as a bug as a customer should not be purchasing 2 workout programs??
+- 2. When you purchase an order when the customer is already enrolled on a course and the trainer goes into class attendance, then in there there is 2 users with the same name (same user.id) and when you click on one as attended both are set to attend. This might not be seen as a bug as a customer should not be purchasing 2 workout programs??
 
