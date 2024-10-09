@@ -63,6 +63,12 @@ def checkout(request):
                 try:
                     product = Product.objects.get(id=item_id)
                     if isinstance(item_data, int):
+                        if item_data <= 0:
+                            messages.error(request,
+                                           "You must enter a valid quantity"
+                                           )
+                            return redirect(reverse('view_bag'))
+
                         order_ln_item = OrderLineItem(
                             order=order,
                             product=product,
@@ -116,6 +122,13 @@ def checkout(request):
 
         current_bag = bag_contents(request)
         total = current_bag['grand_total']
+
+        if total <= 0:
+            messages.error(request,
+                           "You must enter a valid quantity"
+                           )
+            return redirect(reverse('view_bag'))
+
         stripe_total = round(total * 100)
         stripe.api_key = stripe_secret_key
         intent = stripe.PaymentIntent.create(

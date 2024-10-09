@@ -24,7 +24,6 @@ def add_to_bag(request, item_id):
         messages.error(request, "Invalid quantity provided!")
         redirect(redirect_url)
 
-    
     size = None
     if 'product_size' in request.POST:
         size = request.POST['product_size']

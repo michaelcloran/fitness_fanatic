@@ -10,7 +10,6 @@ def about_site(request):
     Renders the most recent information on the website author
     and allows the collaboration requests
     Displays an individual instance of :model:`about.About`.
-   
     **Template**
     :template:`about/about.html`
     """
