@@ -16,8 +16,15 @@ def add_to_bag(request, item_id):
     """ Add a quantity of the specified product to the shopping bag """
 
     product = get_object_or_404(Product, pk=item_id)
-    quantity = int(request.POST.get('quantity'))
     redirect_url = request.POST.get('redirect_url')
+    quantity = 0
+    try:
+        quantity = int(request.POST.get('quantity'))
+    except (ValueError, TypeError):
+        messages.error(request, "Invalid quantity provided!")
+        redirect(redirect_url)
+
+    
     size = None
     if 'product_size' in request.POST:
         size = request.POST['product_size']
@@ -62,7 +69,12 @@ def adjust_bag(request, item_id):
         to the specified amount """
 
     product = get_object_or_404(Product, pk=item_id)
-    quantity = int(request.POST.get('quantity'))
+    quantity = 0
+    try:
+        quantity = int(request.POST.get('quantity'))
+    except (ValueError, TypeError):
+        messages.error(request, "Invalid quantity provided!")
+        return redirect(reverse('view_bag'))
 
     size = None
     if 'product_size' in request.POST:
